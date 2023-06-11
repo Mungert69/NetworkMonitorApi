@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "f8a36d16-1086-4fb9-9623-bb84474fbfdd",
+		"name": "Quantum Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24273128"
+	},
+	"item": [
+		{
+			"name": "CheckQuantum",
+			"protocolProfileBehavior": {
+				"strictSSL": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\"cloudflare.com\"",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://monitorsrv1.mahadeva.co.uk:2087/Chat/CheckQuantum",
+					"protocol": "https",
+					"host": [
+						"monitorsrv1",
+						"mahadeva",
+						"co",
+						"uk"
+					],
+					"port": "2087",
+					"path": [
+						"Chat",
+						"CheckQuantum"
+					]
+				},
+				"description": "# Quantum Readiness Check API\n\nThis guide provides instructions on how to use the Quantum Readiness Check API. This API allows you to check if a given URL is using quantum-safe encryption.\n\n## Requirements\n\nTo send requests to the API, you'll need the following:\n\n- A RapidAPI account. You can sign up [here](https://rapidapi.com/).\n- Your RapidAPI key. You can find this on your RapidAPI dashboard.\n    \n\n## Usage\n\nTo use the API, send a POST request to the following endpoint:\n\n`https://quantum-readiness-check1.p.rapidapi.com/Chat/CheckQuantum`\n\nThe body of the request should contain a single string, which is the URL you want to check.\n\nHere's an example using cURL:\n\n``` bash\ncurl --request POST \\\n  --url https://quantum-readiness-check1.p.rapidapi.com/Chat/CheckQuantum \\\n  --header 'X-RapidAPI-Host: quantum-readiness-check1.p.rapidapi.com' \\\n  --header 'X-RapidAPI-Key: <YOUR_RAPIDAPI_KEY>' \\\n  --header 'Content-Type: application/json' \\\n  --data '\"<URL_TO_CHECK>\"'\n\n```\n\nReplace `<YOUR_RAPIDAPI_KEY>` with your RapidAPI key, and replace `<URL_TO_CHECK>` with the URL you want to check.\n\nPlease note that the URL should be enclosed in double quotes, and the entire JSON string should be enclosed in single quotes.\n\n## Response\n\nThe API will return a JSON response indicating whether the URL is using quantum-safe encryption.\n\nHere's an example of a successful response:\n\n``` json\n{\n  \"message\": \" SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512\",\n  \"success\": true,\n  \"data\": null\n}\n\n```\n\nIn this response, the `\"message\"` field provides information about the encryption used by the URL, and the `\"success\"` field indicates whether the check was successful.\n\n## Support\n\ncontact [support@mahadeva.co.uk](mailto:support@mahadeva.co.uk)"
+			},
+			"response": [
+				{
+					"name": "CheckQuantum",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"cloudflare.com\"",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://monitorsrv1.mahadeva.co.uk:2087/Chat/CheckQuantum",
+							"protocol": "https",
+							"host": [
+								"monitorsrv1",
+								"mahadeva",
+								"co",
+								"uk"
+							],
+							"port": "2087",
+							"path": [
+								"Chat",
+								"CheckQuantum"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 11 Jun 2023 19:48:49 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=C%2BE4fxPg%2BHBtPQO3QPwLoYqOTAyq%2BqNCQoLlSVe8A3Q4Jcf4Uc0Is5jodRX%2FWYe5%2FBLqv%2F%2BD%2FAYgPpeLD0b0Jx%2BpynStv0DfNoF5JeZaL2Ih2n9a9JGaaxOYfX2Ep3xGmPDXPzBejJBno9ED94yV8IH4\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "NEL",
+							"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "7d5c5fb2db01386d-LHR"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":2087\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \" SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512\",\n    \"success\": true,\n    \"data\": null\n}"
+				}
+			]
+		}
+	]
+}
