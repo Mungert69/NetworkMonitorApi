@@ -28,6 +28,7 @@ namespace NetworkMonitor.Controllers
         }
 
         // A post method to call OpenAiService.CheckQuantum() to check if the supplied url is a quantum ready.
+        [HttpPost("CheckQuantum")]
         public async Task<ResultObj> CheckQuantum([FromBody] UrlObject urlObject)
         {
             var result = new ResultObj();
