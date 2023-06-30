@@ -21,23 +21,20 @@ namespace NetworkMonitor.Controllers
         private readonly ILogger _logger;
         private IApiService _apiService;
 
-        public ChatController( INetLoggerFactory loggerFactory, IApiService apiService)
+        public ChatController(INetLoggerFactory loggerFactory, IApiService apiService)
         {
             _apiService = apiService;
             _logger = loggerFactory.GetLogger("ChatController");
         }
 
         // A post method to call OpenAiService.CheckQuantum() to check if the supplied url is a quantum ready.
-        // POST: api/Chat/CheckQuantum
-        [HttpPost("CheckQuantum")]
-        public async Task<ResultObj> CheckQuantum([FromBody] string url)
+        public async Task<ResultObj> CheckQuantum([FromBody] UrlObject urlObject)
         {
             var result = new ResultObj();
             result.Message = " API : CheckQuantum :";
             try
             {
-                result = await _apiService.CheckQuantum(url);
-               
+                result = await _apiService.CheckQuantum(urlObject.Url);
             }
             catch (Exception ex)
             {
@@ -48,6 +45,10 @@ namespace NetworkMonitor.Controllers
             return result;
         }
 
-              
+
+    }
+    public class UrlObject
+    {
+        public string Url { get; set; }
     }
 }
