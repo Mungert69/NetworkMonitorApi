@@ -7,7 +7,6 @@ servers:
 paths:
   /Chat/CheckQuantum:
     post:
-      operationId: checkQuantum
       summary: Check if the supplied URL is using quantum-safe key encapsulation mechanisms.
       requestBody:
         required: true
