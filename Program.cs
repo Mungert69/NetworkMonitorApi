@@ -37,7 +37,7 @@ namespace NetworkMonitor.Api
             options.Listen(IPAddress.Any, 2086);         // http:*:65123
             options.Listen(IPAddress.Any, 2087, listenOptions =>
             {
-                listenOptions.UseHttps("https.pfx", "Ac£0462110");
+                listenOptions.UseHttps("https-freenetworkmonitor.pfx", "Ac£0462110");
             });
         }
         else
@@ -45,7 +45,7 @@ namespace NetworkMonitor.Api
             options.Listen(IPAddress.Any, 2086);         // http:*:65123
             options.Listen(IPAddress.Any, 2087, listenOptions =>
             {
-                listenOptions.UseHttps("https.pfx", "Ac£0462110");
+                listenOptions.UseHttps("https-freenetworkmonitor.pfx", "Ac£0462110");
             });
         }
     }).UseStartup<Startup>();
