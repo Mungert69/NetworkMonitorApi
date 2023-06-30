@@ -1,9 +1,9 @@
 {
     "schema_version": "v1",
-    "name_for_human": "Quantum Readiness Checker",
+    "name_for_human": "Quantum Ready Check",
     "name_for_model": "quantumKemChecker",
-    "description_for_human": "Check if a website is using quantum-safe key encapsulation mechanisms.",
-    "description_for_model": "This plugin allows you to check if a given website is using quantum-safe key encapsulation mechanisms (KEMs). Use 'quantumKemChecker' to interact with this plugin.",
+    "description_for_human": "Check if a website is using quantum-safe key exchange. This helps ensure your website is quantum ready.",
+    "description_for_model": "Check if a given website is using quantum-safe key encapsulation mechanisms (KEMs). Provide the website domain name to check.",
     "auth": {
         "type": "none"
     },
