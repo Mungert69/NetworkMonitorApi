@@ -9,7 +9,7 @@
     },
     "api": {
         "type": "openapi",
-        "url": "https://freenetworkmonitor.click:2087/openapi.yaml"
+        "url": "https://srv1.freenetworkmonitor.click/openapi.yaml"
     },
     "logo_url": "https://freenetworkmonitor.click/logo.png",
     "contact_email": "support@mahadeva.co.uk",

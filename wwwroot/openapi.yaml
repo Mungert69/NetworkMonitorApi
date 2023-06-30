@@ -3,7 +3,7 @@ info:
   title: Quantum KEM Checker API
   version: 1.0.0
 servers:
-  - url: https://freenetworkmonitor.click:2087
+  - url: https://srv1.freenetworkmonitor.click
 paths:
   /Chat/CheckQuantum:
     post:
