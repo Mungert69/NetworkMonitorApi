@@ -1,12 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp7.0</TargetFramework>
-    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
-    <PublishProfile>DefaultContainer</PublishProfile>
-    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:7.0-jammy-amd64</ContainerBaseImage>
-    <ContainerImageName>mungert/networkmonitorapi</ContainerImageName>
-    <ContainerImageTag>0.0.1</ContainerImageTag>
+
       <StartupObject>NetworkMonitor.Api.Program</StartupObject>
 </PropertyGroup>
 
@@ -21,11 +16,7 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	 </ItemGroup>
-   <ItemGroup>
-	  <None Update="appsettings-Development.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	 </ItemGroup>
+
 
    <ItemGroup>
     <ProjectReference Include="..\NetworkMonitor\NetworkMonitor.csproj" />
