@@ -1,0 +1,55 @@
+Hosting environment: Production
+Content root path: /home/mahadeva/code/NetworkMonitorApi
+Now listening on: http://0.0.0.0:2086
+Now listening on: https://0.0.0.0:2087
+Application started. Press Ctrl+C to shut down.
+6/11/2023 7:44:34 PM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+ Success : cloudflare.com : x25519_kyber512
+6/11/2023 7:44:34 PM - Info -  SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512
+6/11/2023 7:48:49 PM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+ Success : cloudflare.com : x25519_kyber512
+6/11/2023 7:48:49 PM - Info -  SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512
+6/11/2023 7:58:32 PM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+ Success : cloudflare.com : x25519_kyber512
+6/11/2023 7:58:32 PM - Info -  SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512
+6/11/2023 7:59:05 PM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+ Success : cloudflare.com : x25519_kyber512
+6/11/2023 7:59:05 PM - Info -  SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512
+6/11/2023 7:59:08 PM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+ Success : cloudflare.com : x25519_kyber512
+6/11/2023 7:59:08 PM - Info -  SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512
+6/11/2023 8:02:23 PM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+6/11/2023 8:02:23 PM - Info -  SERVICE : CheckQuantum : Could not negotiate quantum safe handshake
+6/11/2023 8:13:48 PM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+ Success : cloudflare.com : x25519_kyber512
+6/11/2023 8:13:48 PM - Info -  SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512
+6/11/2023 8:15:46 PM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+ Success : cloudflare.com : x25519_kyber512
+6/11/2023 8:15:46 PM - Info -  SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512
+6/11/2023 8:30:23 PM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+ Success : cloudflare.com : x25519_kyber512
+6/11/2023 8:30:23 PM - Info -  SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512
+6/11/2023 8:44:55 PM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+ Success : cloudflare.com : x25519_kyber512
+6/11/2023 8:44:55 PM - Info -  SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512
+6/12/2023 12:47:23 AM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+ Success : cloudflare.com : x25519_kyber512
+6/12/2023 12:47:23 AM - Info -  SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512
+6/12/2023 11:35:15 AM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+ Success : cloudflare.com : x25519_kyber512
+6/12/2023 11:35:15 AM - Info -  SERVICE : CheckQuantum : Using quantum safe handshake : x25519_kyber512
+6/30/2023 12:26:40 PM - Error -  SERVICE : CheckQuantum :  Error : No space left on device : '/home/mahadeva/code/NetworkMonitorApi/AlgoTable.csv'
+6/30/2023 12:26:40 PM - Info -  SERVICE : CheckQuantum :  Error : No space left on device : '/home/mahadeva/code/NetworkMonitorApi/AlgoTable.csv'
+6/30/2023 12:28:28 PM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+6/30/2023 12:28:28 PM - Info -  SERVICE : CheckQuantum : Could not negotiate quantum safe handshake
+Application is shutting down...
+6/30/2023 12:29:24 PM - Info - OnStopping
+Hosting environment: Production
+Content root path: /home/mahadeva/code/NetworkMonitorApi
+Now listening on: http://0.0.0.0:2086
+Now listening on: https://0.0.0.0:2087
+Application started. Press Ctrl+C to shut down.
+6/30/2023 12:31:26 PM - Info -  NETCONNECT : QuantumFilterSkip = 0 QuantumFilterStart = 0 SmtpFilterSkip = 0 SmtpFilterStart = 0 MaxTaskQueueSize = 0
+6/30/2023 12:31:26 PM - Info -  SERVICE : CheckQuantum : Could not negotiate quantum safe handshake
+Application is shutting down...
+6/30/2023 5:58:49 PM - Info - OnStopping
