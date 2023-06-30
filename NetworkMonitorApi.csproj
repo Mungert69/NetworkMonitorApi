@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-
+    <TargetFramework>netcoreapp7.0</TargetFramework>
+    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
       <StartupObject>NetworkMonitor.Api.Program</StartupObject>
 </PropertyGroup>
 
@@ -16,7 +17,11 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	 </ItemGroup>
-
+   <ItemGroup>
+	  <None Update="appsettings-Development.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	 </ItemGroup>
 
    <ItemGroup>
     <ProjectReference Include="..\NetworkMonitor\NetworkMonitor.csproj" />
