@@ -1,0 +1,33 @@
+openapi: 3.0.0
+info:
+  title: Quantum KEM Checker API
+  version: 1.0.0
+servers:
+  - url: https://monitorsrv.mahadeva.co.uk:2058
+paths:
+  /Chat/CheckQuantum:
+    post:
+      summary: Check if the supplied URL is using quantum-safe key encapsulation mechanisms.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: A ResultObj with the status of the quantum check.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultObj'
+components:
+  schemas:
+    ResultObj:
+      type: object
+      properties:
+        Message:
+          type: string
+        Success:
+          type: boolean
+

@@ -13,6 +13,7 @@ using NetworkMonitor.Utils;
 using NetworkMonitor.Auth;
 using NetworkMonitor.Objects.Factory;
 using HostInitActions;
+using Microsoft.Extensions.FileProviders;
 
 namespace NetworkMonitor.Api
 {
@@ -21,7 +22,7 @@ namespace NetworkMonitor.Api
         private readonly CancellationTokenSource _cancellationTokenSource;
         public Startup(IConfiguration configuration)
         {
-             _cancellationTokenSource = new CancellationTokenSource();
+            _cancellationTokenSource = new CancellationTokenSource();
             Configuration = configuration;
         }
 
@@ -38,7 +39,7 @@ namespace NetworkMonitor.Api
                 options.AddPolicy("AllowAnyOrigin",
                     builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
-                   services.AddSingleton<INetLoggerFactory, NetLoggerFactory>();
+            services.AddSingleton<INetLoggerFactory, NetLoggerFactory>();
             services.AddSingleton<IApiService, ApiService>();
             services.AddSingleton(_cancellationTokenSource);
 
@@ -50,7 +51,8 @@ namespace NetworkMonitor.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime)
         {
-             appLifetime.ApplicationStopping.Register(() => {
+            appLifetime.ApplicationStopping.Register(() =>
+            {
                 _cancellationTokenSource.Cancel();
             });
             if (env.IsDevelopment())
@@ -72,6 +74,7 @@ namespace NetworkMonitor.Api
             {
                 endpoints.MapControllers();
             });
+            app.UseStaticFiles();
         }
     }
 }
