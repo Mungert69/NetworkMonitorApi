@@ -74,7 +74,14 @@ namespace NetworkMonitor.Api
             {
                 endpoints.MapControllers();
             });
-            app.UseStaticFiles();
+            var provider = new FileExtensionContentTypeProvider();
+    // Add new mappings
+    provider.Mappings[".yaml"] = "text/yaml";
+
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        ContentTypeProvider = provider
+    });
         }
     }
 }
