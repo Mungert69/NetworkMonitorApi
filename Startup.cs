@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.StaticFiles;
+
 using NetworkMonitor.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -75,13 +77,13 @@ namespace NetworkMonitor.Api
                 endpoints.MapControllers();
             });
             var provider = new FileExtensionContentTypeProvider();
-    // Add new mappings
-    provider.Mappings[".yaml"] = "text/yaml";
+            // Add new mappings
+            provider.Mappings[".yaml"] = "text/yaml";
 
-    app.UseStaticFiles(new StaticFileOptions
-    {
-        ContentTypeProvider = provider
-    });
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ContentTypeProvider = provider
+            });
         }
     }
 }
