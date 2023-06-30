@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Quantum Readiness Checker",
+    "name_for_model": "quantumKemChecker",
+    "description_for_human": "Check if a website is using quantum-safe key encapsulation mechanisms.",
+    "description_for_model": "This plugin allows you to check if a given website is using quantum-safe key encapsulation mechanisms (KEMs). Use 'quantumKemChecker' to interact with this plugin.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://freenetworkmonitor.click:2087/openapi.yaml"
+    },
+    "logo_url": "https://freenetworkmonitor.click/logo.png",
+    "contact_email": "support@mahadeva.co.uk",
+    "legal_info_url": "https://freenetworkmonitor.click/privacypolicy.html"
+}
+
