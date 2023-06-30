@@ -3,10 +3,11 @@ info:
   title: Quantum KEM Checker API
   version: 1.0.0
 servers:
-  - url: https://monitorsrv.mahadeva.co.uk:2058
+  - url: https://monitorsrv1.mahadeva.co.uk:2087
 paths:
   /Chat/CheckQuantum:
     post:
+      operationId: checkQuantum
       summary: Check if the supplied URL is using quantum-safe key encapsulation mechanisms.
       requestBody:
         required: true
