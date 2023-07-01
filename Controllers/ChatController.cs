@@ -35,7 +35,7 @@ namespace NetworkMonitor.Controllers
             result.Message = " API : CheckQuantum :";
             try
             {
-                result = await _apiService.CheckQuantum(urlObject.Url);
+                result = await _apiService.CheckQuantum(urlObject);
             }
             catch (Exception ex)
             {
@@ -48,8 +48,5 @@ namespace NetworkMonitor.Controllers
 
 
     }
-    public class UrlObject
-    {
-        public string Url { get; set; }
-    }
+    
 }

@@ -51,7 +51,7 @@ namespace NetworkMonitor.Api.Services
         {
             _logger.Info("OnStopping");
         }
-        public async Task<ResultObj> CheckQuantum(string url)
+        public async Task<ResultObj> CheckQuantum(UrlObject urlObj)
         {
             var result = new ResultObj();
             result.Message = " SERVICE : CheckQuantum : ";
@@ -60,7 +60,8 @@ namespace NetworkMonitor.Api.Services
                 var monitorPingInfos = new List<MonitorPingInfo>();
                 monitorPingInfos.Add(new MonitorPingInfo()
                 {
-                    Address = url,
+                    Address = urlObj.Url,
+                    Port=urlObj.Port,
                     EndPointType = "quantum",
                     Timeout = 10000,
                 });
