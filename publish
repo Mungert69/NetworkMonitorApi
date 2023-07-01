@@ -1,1 +1,3 @@
+systemctl stop NetworkMonitorApi.service
 dotnet publish --os linux --arch x64  --output ../services/ -c Release --self-contained true 
+systemctl start NetworkMonitorApi.service
