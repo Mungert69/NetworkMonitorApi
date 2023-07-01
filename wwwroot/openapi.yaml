@@ -22,14 +22,14 @@ paths:
                 - url
       responses:
         '200':
-          description: A ResultObj with the status of the quantum check.
+          description: The result is returned with the status of the quantum check. 
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResultObj'
 components:
   schemas:
-    ResultObj:
+    ResultObj: 
       type: object
       properties:
         Message:

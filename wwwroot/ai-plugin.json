@@ -11,8 +11,8 @@
         "type": "openapi",
         "url": "https://srv1.freenetworkmonitor.click/openapi.yaml"
     },
-    "logo_url": "https://freenetworkmonitor.click/logo.png",
-    "contact_email": "support@mahadeva.co.uk",
+    "logo_url": "https://freenetworkmonitor.click/logo-square.png",
+    "contact_email": "support@freenetworkmonitor.click",
     "legal_info_url": "https://freenetworkmonitor.click/privacypolicy.html"
 }
 
