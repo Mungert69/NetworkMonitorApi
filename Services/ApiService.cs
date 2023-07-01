@@ -61,7 +61,7 @@ namespace NetworkMonitor.Api.Services
                 monitorPingInfos.Add(new MonitorPingInfo()
                 {
                     Address = urlObj.Url,
-                    Port=urlObj.Port,
+                    Port = urlObj.Port,
                     EndPointType = "quantum",
                     Timeout = 10000,
                 });
@@ -74,7 +74,22 @@ namespace NetworkMonitor.Api.Services
                 await netConnect.Connect();
                 result.Message += netConnect.MpiConnect.PingInfo.Status;
                 result.Success = netConnect.MpiConnect.IsUp;
+                var data = new DataObj();
+                data.TestedUrl = urlObj.Url;
+                data.ResultSuccess = netConnect.MpiConnect.IsUp;
+                string[] splitData = result.Message.Split(':');
+                if (splitData.Length > 3)
+                {
+                    data.QuantumKeyExchange = splitData[3];
+                }
+                if (splitData.Length > 2)
+                {
+                    data.ResultStatus = splitData[2];
+                }
+                result.Data=data;
             }
+
+
             catch (Exception ex)
             {
                 result.Success = false;
