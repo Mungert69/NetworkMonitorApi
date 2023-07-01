@@ -24,7 +24,7 @@ namespace NetworkMonitor.Api.Services
 {
     public interface IApiService
     {
-        Task<ResultObj> CheckQuantum(string url);
+        Task<ResultObj> CheckQuantum(UrlObject url);
     }
     public class ApiService : IApiService
     {
