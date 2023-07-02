@@ -25,6 +25,11 @@ namespace NetworkMonitor.Api.Services
     public interface IApiService
     {
         Task<ResultObj> CheckQuantum(UrlObject url);
+        Task<ResultObj> CheckSmtp(HostObject host);
+        Task<ResultObj> CheckHttp(HostObject host);
+        Task<ResultObj> CheckDns(HostObject host);
+        Task<ResultObj> CheckIcmp(HostObject host);
+
     }
     public class ApiService : IApiService
     {
@@ -33,6 +38,7 @@ namespace NetworkMonitor.Api.Services
         private readonly IServiceScopeFactory _scopeFactory;
         private readonly CancellationToken _token;
         private readonly PingParams _pingParams;
+        private readonly NetConnectCollection _netConnectCollection;
         private string _frontEndUrl = "https://freenetworkmonior.click";
         public ApiService(IConfiguration config, INetLoggerFactory loggerFactory, IServiceScopeFactory scopeFactory, CancellationTokenSource cancellationTokenSource)
         {
@@ -43,6 +49,10 @@ namespace NetworkMonitor.Api.Services
             _scopeFactory = scopeFactory;
             _logger = loggerFactory.GetLogger("ApiService");
             _pingParams = SystemParamsHelper.GetPingParams(_config);
+            var connectFactory = new ConnectFactory(_config, true);
+            _netConnectCollection = new NetConnectCollection(_logger, _config, connectFactory);
+            _netConnectCollection.SetPingParams(_pingParams);
+
 
         }
 
@@ -57,24 +67,23 @@ namespace NetworkMonitor.Api.Services
             result.Message = " SERVICE : CheckQuantum : ";
             try
             {
-                var monitorPingInfos = new List<MonitorPingInfo>();
-                monitorPingInfos.Add(new MonitorPingInfo()
+                //var monitorPingInfos = new List<MonitorPingInfo>();
+                //monitorPingInfos.Add();
+                var monitorPingInfo = new MonitorPingInfo()
                 {
                     Address = urlObj.Url,
                     Port = urlObj.Port,
                     EndPointType = "quantum",
-                    Timeout = 10000,
-                });
+                    Timeout = 20000,
+                };
 
-                var connectFactory = new ConnectFactory(_config, true);
-                var netConnectCollection = new NetConnectCollection(_logger, _config, connectFactory);
-                SemaphoreSlim semaphore = new SemaphoreSlim(1);
-                await netConnectCollection.NetConnectFactory(monitorPingInfos, _pingParams, true, semaphore);
-                var netConnect = netConnectCollection[0];
+                //SemaphoreSlim semaphore = new SemaphoreSlim(1);
+                // await netConnectCollection.NetConnectFactory(monitorPingInfos, _pingParams, true, semaphore);
+                var netConnect = _netConnectCollection.GetNetConnectInstance(monitorPingInfo);
                 await netConnect.Connect();
                 result.Message += netConnect.MpiConnect.PingInfo.Status;
                 result.Success = netConnect.MpiConnect.IsUp;
-                var data = new DataObj();
+                var data = new QuantumDataObj();
                 data.TestedUrl = urlObj.Url;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
                 string[] splitData = result.Message.Split(':');
@@ -86,9 +95,194 @@ namespace NetworkMonitor.Api.Services
                 {
                     data.ResultStatus = splitData[2];
                 }
-                result.Data=data;
+                result.Data = data;
             }
 
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message += " Error : " + ex.Message;
+                _logger.Error(result.Message);
+
+            }
+            return result;
+        }
+
+
+       public async Task<ResultObj> CheckHttp(HostObject hostObj)
+        {
+            var result = new ResultObj();
+            var urlObj= new UrlObject();
+            urlObj.Url=hostObj.Address;
+            // some convoluted logic due to way HttpConnect handles urls.
+            if (hostObj.Port == 0) hostObj.Port = urlObj.Port;
+            if (urlObj.Port==80 || urlObj.Port==443)
+            {
+                hostObj.Port = 0;
+            }
+            result.Message = " SERVICE : CheckHttp : ";
+            try
+            {
+                //var monitorPingInfos = new List<MonitorPingInfo>();
+                //monitorPingInfos.Add();
+                var monitorPingInfo = new MonitorPingInfo()
+                {
+                    Address = urlObj.Url,
+                    Port = hostObj.Port,
+                    EndPointType = "httphtml",
+                    Timeout = 20000,
+                };
+
+                //SemaphoreSlim semaphore = new SemaphoreSlim(1);
+                // await netConnectCollection.NetConnectFactory(monitorPingInfos, _pingParams, true, semaphore);
+                var netConnect = _netConnectCollection.GetNetConnectInstance(monitorPingInfo);
+                await netConnect.Connect();
+                result.Message += netConnect.MpiConnect.PingInfo.Status;
+                result.Success = netConnect.MpiConnect.IsUp;
+                var data = new DataObj();
+                data.TestedAddress = hostObj.Address;
+                data.TestedPort=monitorPingInfo.Port;
+                data.ResultSuccess = netConnect.MpiConnect.IsUp;
+                string[] splitData = result.Message.Split(':');
+                if (splitData.Length > 2)
+                {
+                    data.ResultStatus = splitData[2];
+                }
+                result.Data = data;
+            }
+
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message += " Error : " + ex.Message;
+                _logger.Error(result.Message);
+
+            }
+            return result;
+        }
+        public async Task<ResultObj> CheckSmtp(HostObject hostObj)
+        {
+            var result = new ResultObj();
+            if (hostObj.Port == 0) hostObj.Port = 25;
+
+            result.Message = " SERVICE : CheckSmtp : ";
+            try
+            {
+                var monitorPingInfo = new MonitorPingInfo()
+                {
+                    Address = hostObj.Address,
+                    Port = hostObj.Port,
+                    EndPointType = "smtp",
+                    Timeout = 20000,
+                };
+
+                //SemaphoreSlim semaphore = new SemaphoreSlim(1);
+                // await netConnectCollection.NetConnectFactory(monitorPingInfos, _pingParams, true, semaphore);
+                var netConnect = _netConnectCollection.GetNetConnectInstance(monitorPingInfo);
+                await netConnect.Connect();
+                result.Message += netConnect.MpiConnect.PingInfo.Status;
+                result.Success = netConnect.MpiConnect.IsUp;
+                var data = new DataObj();
+                data.TestedAddress = hostObj.Address;
+                data.TestedPort = hostObj.Port;
+                data.ResultSuccess = netConnect.MpiConnect.IsUp;
+                data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                string[] splitData = result.Message.Split(':');
+                if (splitData.Length > 2)
+                {
+                    data.ResultStatus = splitData[2];
+                }
+                result.Data = data;
+            }
+
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message += " Error : " + ex.Message;
+                _logger.Error(result.Message);
+
+            }
+            return result;
+        }
+
+        //Method to check icmp
+        public async Task<ResultObj> CheckIcmp(HostObject hostObj)
+        {
+            var result = new ResultObj();
+
+            result.Message = " SERVICE : CheckIcmp : ";
+            try
+            {
+                var monitorPingInfo = new MonitorPingInfo()
+                {
+                    Address = hostObj.Address,
+                    EndPointType = "icmp",
+                    Timeout = 20000,
+                };
+
+                //SemaphoreSlim semaphore = new SemaphoreSlim(1);
+                // await netConnectCollection.NetConnectFactory(monitorPingInfos, _pingParams, true, semaphore);
+                var netConnect = _netConnectCollection.GetNetConnectInstance(monitorPingInfo);
+                await netConnect.Connect();
+                result.Message += netConnect.MpiConnect.PingInfo.Status;
+                result.Success = netConnect.MpiConnect.IsUp;
+                var data = new DataObj();
+                data.TestedAddress = hostObj.Address;
+                data.TestedPort = hostObj.Port;
+                data.ResultSuccess = netConnect.MpiConnect.IsUp;
+                data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                string[] splitData = result.Message.Split(':');
+                if (splitData.Length > 2)
+                {
+                    data.ResultStatus = splitData[2];
+                }
+                result.Data = data;
+            }
+
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message += " Error : " + ex.Message;
+                _logger.Error(result.Message);
+
+            }
+            return result;
+        }
+
+        //method to check dns lookup
+        public async Task<ResultObj> CheckDns(HostObject hostObj)
+        {
+            var result = new ResultObj();
+            result.Message = " SERVICE : CheckDns : ";
+            try
+            {
+                var monitorPingInfo = new MonitorPingInfo()
+                {
+                    Address = hostObj.Address,
+                    EndPointType = "dns",
+                    Timeout = 20000,
+                };
+
+                //SemaphoreSlim semaphore = new SemaphoreSlim(1);
+                // await netConnectCollection.NetConnectFactory(monitorPingInfos, _pingParams, true, semaphore);
+                var netConnect = _netConnectCollection.GetNetConnectInstance(monitorPingInfo);
+                await netConnect.Connect();
+                result.Message += netConnect.MpiConnect.PingInfo.Status;
+                result.Success = netConnect.MpiConnect.IsUp;
+                var data = new DataObj();
+                data.TestedAddress = hostObj.Address;
+                data.TestedPort = hostObj.Port;
+                data.ResultSuccess = netConnect.MpiConnect.IsUp;
+                data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+               string[] splitData = result.Message.Split(new char[] {':'}, 3);
+                if (splitData.Length > 2 )
+                {
+                    if ( netConnect.MpiConnect.IsUp)
+                  data.ResultStatus="Resolved addresses : "+splitData[2];
+                  else data.ResultStatus=splitData[2];
+                }
+                result.Data = data;
+            }
 
             catch (Exception ex)
             {
