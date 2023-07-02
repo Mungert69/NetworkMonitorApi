@@ -142,6 +142,7 @@ namespace NetworkMonitor.Api.Services
                 var data = new DataObj();
                 data.TestedAddress = hostObj.Address;
                 data.TestedPort=monitorPingInfo.Port;
+                data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
                 string[] splitData = result.Message.Split(':');
                 if (splitData.Length > 2)
