@@ -5,19 +5,25 @@ using System.Threading.Tasks;
 
 namespace NetworkMonitor.Api.Services
 {
-    public class DataObj
+
+       public class DataObj
     {
-        private string _setupQuantumMonitor=" To setup a quantum ready monitor visit : https://freenetworkmonitor.click";
-        private string _quantumKeyExchange="";
+        private string _setupNetworkMonitor = "To setup a free network monitor visit : https://freenetworkmonitor.click";
 
-        private string _testedUrl="";
-        private bool _resultSuccess=false;
-        private string _resultStatus="";
+        private string _testedAddress = "";
+        private ushort? _testedPort = 0;
 
-        public string SetupQuantumMonitor { get => _setupQuantumMonitor; set => _setupQuantumMonitor = value; }
-        public string QuantumKeyExchange { get => _quantumKeyExchange; set => _quantumKeyExchange = value; }
-        public string TestedUrl { get => _testedUrl; set => _testedUrl = value; }
+        private ushort? responseTime = 0;
+        private bool _resultSuccess = false;
+        private string _resultStatus = "";
+
         public bool ResultSuccess { get => _resultSuccess; set => _resultSuccess = value; }
         public string ResultStatus { get => _resultStatus; set => _resultStatus = value; }
+        public string TestedAddress { get => _testedAddress; set => _testedAddress = value; }
+        public ushort? TestedPort { get => _testedPort; set => _testedPort = value; }
+        public ushort? ResponseTime { get => responseTime; set => responseTime = value; }
     }
+
+
 }
+ 
