@@ -5,13 +5,13 @@ info:
   description: This API checks if a given website is using quantum-safe key encapsulation mechanisms. For more information, visit our website at https://freenetworkmonitor.click.
 
 servers:
-  - url: https://srv1.freenetworkmonitor.click
+  - url: https://srv2.freenetworkmonitor.click
 paths:
-  /Chat/CheckQuantum:
+  /Chat/CheckHttp:
     post:
-      operationId: checkQuantum
-      summary: Check if the supplied URL is using quantum-safe key encapsulation mechanisms.
-      description: This endpoint checks if the supplied URL is using quantum-safe key encapsulation mechanisms. For more information, visit our website at https://freenetworkmonitor.click.
+      operationId: checkHttp
+      summary: Check the response time and status of a website.
+      description: This endpoint checks the response time and status of a website. For more information, visit our website at https://freenetworkmonitor.click.
       requestBody:
         required: true
         content:
@@ -19,14 +19,86 @@ paths:
             schema:
               type: object
               properties:
-                url:
+                address:
                   type: string
-                  description: The URL to check for quantum-safe key encapsulation mechanisms.
+                  description: Address of website to check.
               required:
-                - url
+                - address
       responses:
         '200':
-          description: The result is returned with the status of the quantum check. 
+          description: The result is returned with the status of the check. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultObj'
+  /Chat/CheckIcmp:
+    post:
+      operationId: checkIcmp
+      summary: Check the ping response time of a host.
+      description: This endpoint checks the response time of a icmp ping to a host. For more information, visit our website at https://freenetworkmonitor.click.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+                  description: Address of host to ping.
+              required:
+                - address
+      responses:
+        '200':
+          description: The result is returned with the status of the ping. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultObj'
+  /Chat/CheckDns:
+    post:
+      operationId: checkDns
+      summary: Perform a dns lookup on the host address.
+      description: This endpoint performs a dns lookup on the host address. For more information, visit our website at https://freenetworkmonitor.click.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+                  description: Address of host to check.
+              required:
+                - address
+      responses:
+        '200':
+          description: The result is returned with the status of the check. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultObj'
+  /Chat/CheckSmtp:
+    post:
+      operationId: checkSmtp
+      summary: Check if the stmp server is responding with a helo message.
+      description: This endpoint checks if the stmp server is responding with a helo message. For more information, visit our website at https://freenetworkmonitor.click.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+                  description: Address of host to check.
+              required:
+                - address
+      responses:
+        '200':
+          description: The result is returned with the status of the check. 
           content:
             application/json:
               schema:
@@ -38,27 +110,30 @@ components:
       properties:
         message:
           type: string
-          description: A message describing the result of the quantum check.
+          description: A message describing the result of the check.
         success:
           type: boolean
-          description: Indicates whether the quantum check was successful.
+          description: Indicates whether the check was successful.
         data:
           type: object
-          description: Contains additional details about the quantum check.
+          description: Contains additional details about the check.
           properties:
-            setupQuantumMonitor:
+            setupFreeNetworkMonitor:
               type: string
-              description: Instructions for setting up a quantum-ready monitor.
-            quantumKeyExchange:
+              description: Instructions for setting up a free network monitor.
+            responseTime:
+              type: integer
+              description: The time taken to perform the test. This indicates the response time of the host service.
+            testedAddress:
               type: string
-              description: The quantum key exchange protocol used by the tested URL.
-            testedUrl:
-              type: string
-              description: The URL that was tested for quantum safety.
+              description: The address of the tested host.
+            testedPort:
+              type: integer
+              description: The port used for the check.
             resultSuccess:
               type: boolean
-              description: Indicates whether the tested URL uses a quantum-safe protocol.
+              description: Indicates whether the check was successful.
             resultStatus:
               type: string
-              description: Describes the status of the quantum safety of the tested URL.
+              description: Describes the status of the check.
 
