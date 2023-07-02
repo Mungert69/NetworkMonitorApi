@@ -8,7 +8,7 @@ namespace NetworkMonitor.Api.Services
 
        public class DataObj
     {
-        private string _setupNetworkMonitor = "To setup a service monitor visit : https://freenetworkmonitor.click";
+        private string _setupFreeNetworkMonitor = "To setup a service monitor visit : https://freenetworkmonitor.click";
 
         private string _testedAddress = "";
         private ushort? _testedPort = 0;
