@@ -1,0 +1,37 @@
+
+*** These modified files were found in JOE when it aborted on Sun Jul  2 22:07:37 2023
+*** JOE was aborted by UNIX signal 1
+
+*** File '(Unnamed)'
+,
+*** File '(Unnamed)'
+syntax
+rmargin
+lmargin
+
+*** File '(Unnamed)'
+root
+root
+root
+
+*** File '/home/mahadeva/code/NetworkMonitorApi/.git/MERGE_MSG'
+mergeq
+zs
+
+ branch 'main' of https://github.com/Mungert69/NetworkMonitorApi into main
+
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+
+*** File '(Unnamed)'
+/home/mahadeva/code/NetworkMonitor/.git/MERGE_MSG
+/home/mahadeva/code/NetworkMonitorApi/.git/MERGE_MSG
+
+*** File '* Startup Log *'
+Processing '/etc/joe/editorrc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/editorrc

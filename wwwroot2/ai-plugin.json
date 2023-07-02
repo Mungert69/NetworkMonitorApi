@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Quantum Ready Check",
+    "name_for_model": "quantumKemChecker",
+    "description_for_human": "Check if a website is using quantum-safe key exchange. This helps ensure your website is quantum ready.",
+    "description_for_model": "Check if a given website is using quantum-safe key encapsulation mechanisms .Use it when the user wants to check if a site is safe against quantum encryption attacks.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://srv1.freenetworkmonitor.click/.well-known/openapi.yaml"
+    },
+    "logo_url": "https://freenetworkmonitor.click/img/logo-square.png",
+    "contact_email": "support@freenetworkmonitor.click",
+    "legal_info_url": "https://freenetworkmonitor.click/privacypolicy.html"
+}
+
