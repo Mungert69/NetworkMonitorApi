@@ -22,6 +22,7 @@ namespace NetworkMonitor.Api.Services
         public string TestedAddress { get => _testedAddress; set => _testedAddress = value; }
         public ushort? TestedPort { get => _testedPort; set => _testedPort = value; }
         public ushort? ResponseTime { get => responseTime; set => responseTime = value; }
+        public string SetupNetworkMonitor { get => _setupNetworkMonitor; set => _setupNetworkMonitor = value; }
     }
 
 
