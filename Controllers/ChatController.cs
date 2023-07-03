@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,11 +28,30 @@ namespace NetworkMonitor.Controllers
             _logger = loggerFactory.GetLogger("ChatController");
         }
 
-        // A post method to call OpenAiService.CheckQuantum() to check if the supplied url is a quantum ready.
+        // <snippet_CheckQuantum>
+        /// <summary>
+        /// Check if the supplied URL is using quantum-safe key encapsulation mechanisms.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint checks if the supplied URL is using quantum-safe key encapsulation mechanisms. For more information, visit our website at https://freenetworkmonitor.click.
+        ///
+        /// Sample request:
+        ///
+        ///     POST /Chat/CheckQuantum
+        ///     {
+        ///        "url": "https://cloudflare.com"
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns>The result of the quantum check.</returns>
+        /// <response code="201">Returns a result object</response>
+        /// <response code="400">If the url is null or is unable to be converted to a URI</response>   
         [HttpPost("CheckQuantum")]
-        public async Task<ResultObj> CheckQuantum([FromBody] UrlObject urlObject)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<TResultObj<QuantumDataObj>> CheckQuantum([FromBody] UrlObject urlObject)
         {
-            var result = new ResultObj();
+            var result = new TResultObj<QuantumDataObj>();
             result.Message = " API : CheckQuantum :";
             try
             {
@@ -45,12 +65,34 @@ namespace NetworkMonitor.Controllers
             _logger.Info(result.Message);
             return result;
         }
+        /// </snippet_CheckQuantum>
 
         // A post method to call OpenAiService.CheckSmtp() to check if the supplied url has a running stmp service.
+        // <snippet_CheckSmtp>
+        /// <summary>
+        /// Check if the stmp server is responding with a helo message.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint checks if the stmp server is responding with a helo message. For more information, visit our website at https://freenetworkmonitor.click.
+        ///
+        /// Sample request:
+        ///
+        ///     POST /Chat/CheckSmtp
+        ///     {
+        ///        "address": "smtp.gmail.com",
+        ///        "port": 587,
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns>The result of the smtp check.</returns>
+        /// <response code="201">Returns a result object</response>
+        /// <response code="400">If the address is null or is unable to be converted to a string</response>   
         [HttpPost("CheckSmtp")]
-        public async Task<ResultObj> CheckSmtp([FromBody] HostObject hostObject)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<TResultObj<DataObj>> CheckSmtp([FromBody] HostObject hostObject)
         {
-            var result = new ResultObj();
+            var result = new TResultObj<DataObj>();
             result.Message = " API : CheckSmtp :";
             try
             {
@@ -64,12 +106,32 @@ namespace NetworkMonitor.Controllers
             _logger.Info(result.Message);
             return result;
         }
+        // </snippet_CheckSmtp>
 
         // A post method to call OpenAiService.CheckHttp() to check if the supplied url has a running http service. 
+        // <snippet_CheckHttp>
+        /// <summary>
+        /// Check the response time and status of a website.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint checks the response time and status of a website. For more information, visit our website at https://freenetworkmonitor.click.
+        ///
+        /// Sample request:
+        ///
+        ///     POST /Chat/CheckHttp
+        ///     {
+        ///        "address": "https://www.cloudflare.com"
+        ///     }
+        /// </remarks>
+        /// <returns>The result is returned with the status of the check</returns>
+        /// <response code="201">Returns a result object</response>
+        /// <response code="400">If the address is null or is unable to be converted to a URI</response>   
         [HttpPost("CheckHttp")]
-        public async Task<ResultObj> CheckHttp([FromBody] HostObject hostObject)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<TResultObj<DataObj>> CheckHttp([FromBody] HostObject hostObject)
         {
-            var result = new ResultObj();
+            var result = new TResultObj<DataObj>();
             result.Message = " API : CheckHttp :";
             try
             {
@@ -85,10 +147,30 @@ namespace NetworkMonitor.Controllers
         }
 
         // A post method to call OpenAiService.CheckDns() to check a dns lookup on the host
+        // <snippet_CheckDns>
+        /// <summary>
+        /// Perform a dns lookup on the host address.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint performs a dns lookup on the host address. For more information, visit our website at https://freenetworkmonitor.click.
+        ///
+        /// Sample request:
+        ///
+        ///     POST /Chat/CheckDns
+        ///     {
+        ///        "address": "google.com"
+        ///     }
+        /// </remarks>
+        /// <returns>The result is returned with the status of the check</returns>
+        /// <response code="201">Returns a result object</response>
+        /// <response code="400">If the address is null or is unable to be converted to a URI</response>   
+
         [HttpPost("CheckDns")]
-        public async Task<ResultObj> CheckDns([FromBody] HostObject hostObject)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<TResultObj<DataObj>> CheckDns([FromBody] HostObject hostObject)
         {
-            var result = new ResultObj();
+            var result = new TResultObj<DataObj>();
             result.Message = " API : CheckDns :";
             try
             {
@@ -102,12 +184,33 @@ namespace NetworkMonitor.Controllers
             _logger.Info(result.Message);
             return result;
         }
+        // </snippet_CheckDns>
 
         // a post method to call OpenAiService.CheckIcmp() to check if host responds to a ping.
+           // <snippet_CheckIcmp>
+        /// <summary>
+        /// Check the ping response time of a host.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint checks the response time of a icmp ping to a host. For more information, visit our website at https://freenetworkmonitor.click.
+        ///
+        /// Sample request:
+        ///
+        ///     POST /Chat/CheckIcmp
+        ///     {
+        ///        "address": "1.1.1.1"
+        ///     }
+        /// </remarks>
+        /// <returns>The result is returned with the status of the check</returns>
+        /// <response code="201">Returns a result object</response>
+        /// <response code="400">If the address is null or is unable to be converted to a URI</response>   
+
         [HttpPost("CheckIcmp")]
-        public async Task<ResultObj> CheckIcmp([FromBody] HostObject hostObject)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<TResultObj<DataObj>> CheckIcmp([FromBody] HostObject hostObject)
         {
-            var result = new ResultObj();
+            var result = new TResultObj<DataObj>();
             result.Message = " API : CheckIcmp :";
             try
             {
@@ -121,7 +224,8 @@ namespace NetworkMonitor.Controllers
             _logger.Info(result.Message);
             return result;
         }
-       
+        // </snippet_CheckIcmp>
+
 
     }
 

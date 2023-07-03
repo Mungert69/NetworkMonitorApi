@@ -24,11 +24,11 @@ namespace NetworkMonitor.Api.Services
 {
     public interface IApiService
     {
-        Task<ResultObj> CheckQuantum(UrlObject url);
-        Task<ResultObj> CheckSmtp(HostObject host);
-        Task<ResultObj> CheckHttp(HostObject host);
-        Task<ResultObj> CheckDns(HostObject host);
-        Task<ResultObj> CheckIcmp(HostObject host);
+        Task<TResultObj<QuantumDataObj>> CheckQuantum(UrlObject url);
+        Task<TResultObj<DataObj>> CheckSmtp(HostObject host);
+        Task<TResultObj<DataObj>> CheckHttp(HostObject host);
+        Task<TResultObj<DataObj>> CheckDns(HostObject host);
+        Task<TResultObj<DataObj>> CheckIcmp(HostObject host);
 
     }
     public class ApiService : IApiService
@@ -61,9 +61,9 @@ namespace NetworkMonitor.Api.Services
         {
             _logger.Info("OnStopping");
         }
-        public async Task<ResultObj> CheckQuantum(UrlObject urlObj)
+        public async Task<TResultObj<QuantumDataObj>> CheckQuantum(UrlObject urlObj)
         {
-            var result = new ResultObj();
+            var result = new TResultObj<QuantumDataObj>();
             result.Message = " SERVICE : CheckQuantum : ";
             try
             {
@@ -109,9 +109,9 @@ namespace NetworkMonitor.Api.Services
         }
 
 
-       public async Task<ResultObj> CheckHttp(HostObject hostObj)
+       public async Task<TResultObj<DataObj>> CheckHttp(HostObject hostObj)
         {
-            var result = new ResultObj();
+            var result = new TResultObj<DataObj>();
             var urlObj= new UrlObject();
             urlObj.Url=hostObj.Address;
             // some convoluted logic due to way HttpConnect handles urls.
@@ -161,9 +161,9 @@ namespace NetworkMonitor.Api.Services
             }
             return result;
         }
-        public async Task<ResultObj> CheckSmtp(HostObject hostObj)
+        public async Task<TResultObj<DataObj>> CheckSmtp(HostObject hostObj)
         {
-            var result = new ResultObj();
+            var result = new TResultObj<DataObj>();
             if (hostObj.Port == 0) hostObj.Port = 25;
 
             result.Message = " SERVICE : CheckSmtp : ";
@@ -207,9 +207,9 @@ namespace NetworkMonitor.Api.Services
         }
 
         //Method to check icmp
-        public async Task<ResultObj> CheckIcmp(HostObject hostObj)
+        public async Task<TResultObj<DataObj>> CheckIcmp(HostObject hostObj)
         {
-            var result = new ResultObj();
+            var result = new TResultObj<DataObj>();
 
             result.Message = " SERVICE : CheckIcmp : ";
             try
@@ -251,9 +251,9 @@ namespace NetworkMonitor.Api.Services
         }
 
         //method to check dns lookup
-        public async Task<ResultObj> CheckDns(HostObject hostObj)
+        public async Task<TResultObj<DataObj>> CheckDns(HostObject hostObj)
         {
-            var result = new ResultObj();
+            var result = new TResultObj<DataObj>();
             result.Message = " SERVICE : CheckDns : ";
             try
             {

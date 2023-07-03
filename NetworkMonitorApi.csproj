@@ -6,9 +6,17 @@
       <StartupObject>NetworkMonitor.Api.Program</StartupObject>
 </PropertyGroup>
 
+ <!-- <snippet_SuppressWarnings> -->
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+  <!-- </snippet_SuppressWarnings> -->
+
   <ItemGroup>
     <PackageReference Include="HostInitActions" Version="1.2.0" />
     <PackageReference Include="Microsoft.NET.Build.Containers" Version="0.2.7" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
    
    </ItemGroup>
 
@@ -26,5 +34,7 @@
    <ItemGroup>
     <ProjectReference Include="..\NetworkMonitor\NetworkMonitor.csproj" />
    </ItemGroup>
+
+   
 
 </Project>
