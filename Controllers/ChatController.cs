@@ -46,7 +46,7 @@ namespace NetworkMonitor.Controllers
         /// <returns>The result of the quantum check.</returns>
         /// <response code="201">Returns a result object</response>
         /// <response code="400">If the url is null or is unable to be converted to a URI</response>   
-        [HttpPost("CheckQuantum")]
+        [HttpPost("CheckQuantum",Name = "CheckQuantumOperation")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<TResultObj<QuantumDataObj>> CheckQuantum([FromBody] UrlObject urlObject)
@@ -87,7 +87,7 @@ namespace NetworkMonitor.Controllers
         /// <returns>The result of the smtp check.</returns>
         /// <response code="201">Returns a result object</response>
         /// <response code="400">If the address is null or is unable to be converted to a string</response>   
-        [HttpPost("CheckSmtp")]
+        [HttpPost("CheckSmtp", Name = "CheckSmtpOperation")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<TResultObj<DataObj>> CheckSmtp([FromBody] HostObject hostObject)
@@ -126,7 +126,7 @@ namespace NetworkMonitor.Controllers
         /// <returns>The result is returned with the status of the check</returns>
         /// <response code="201">Returns a result object</response>
         /// <response code="400">If the address is null or is unable to be converted to a URI</response>   
-        [HttpPost("CheckHttp")]
+        [HttpPost("CheckHttp", Name = "CheckHttpOperation")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<TResultObj<DataObj>> CheckHttp([FromBody] HostObject hostObject)
@@ -165,7 +165,7 @@ namespace NetworkMonitor.Controllers
         /// <response code="201">Returns a result object</response>
         /// <response code="400">If the address is null or is unable to be converted to a URI</response>   
 
-        [HttpPost("CheckDns")]
+        [HttpPost("CheckDns", Name = "CheckDnsOperation")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<TResultObj<DataObj>> CheckDns([FromBody] HostObject hostObject)
@@ -205,7 +205,7 @@ namespace NetworkMonitor.Controllers
         /// <response code="201">Returns a result object</response>
         /// <response code="400">If the address is null or is unable to be converted to a URI</response>   
 
-        [HttpPost("CheckIcmp")]
+        [HttpPost("CheckIcmp", Name = "CheckIcmpOperation")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<TResultObj<DataObj>> CheckIcmp([FromBody] HostObject hostObject)
