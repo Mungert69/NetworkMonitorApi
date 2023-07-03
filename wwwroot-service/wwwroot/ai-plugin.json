@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Service Check",
+    "name_for_model": "serviceCheck",
+    "description_for_human": "Check if services are running and how fast they are responding. You can check Website, Email, Domain Lookup and Ping.",
+    "description_for_model": "Check if services are running and how fast they are resonding . Services available are CheckHttp for website html page load time checking , CheckSmtp for testing a helo message to email servers, CheckDns for a dns lookup of the host address and CheckImcp to ping the host address.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://srv2.freenetworkmonitor.click/.well-known/openapi.yaml"
+    },
+    "logo_url": "https://freenetworkmonitor.click/img/logo-square.png",
+    "contact_email": "support@freenetworkmonitor.click",
+    "legal_info_url": "https://freenetworkmonitor.click/privacypolicy.html"
+}
+

@@ -12,6 +12,49 @@ info:
     url: https://freenetworkmonitor.click/license.html
   version: v1
 paths:
+  /Chat/CheckQuantum:
+    post:
+      tags:
+        - Chat
+      summary: Check if the supplied URL is using quantum-safe key encapsulation mechanisms.
+      description: "This endpoint checks if the supplied URL is using quantum-safe key encapsulation mechanisms. For more information, visit our website at https://freenetworkmonitor.click.\r\n            \r\nSample request:\r\n            \r\n    POST /Chat/CheckQuantum\r\n    {\r\n       \"url\": \"https://cloudflare.com\"\r\n    }"
+      operationId: CheckQuantumOperation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UrlObject'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UrlObject'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UrlObject'
+      responses:
+        '201':
+          description: Returns a result object
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/QuantumDataObjTResultObj'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuantumDataObjTResultObj'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/QuantumDataObjTResultObj'
+        '400':
+          description: If the url is null or is unable to be converted to a URI
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
   /Chat/CheckSmtp:
     post:
       tags:
