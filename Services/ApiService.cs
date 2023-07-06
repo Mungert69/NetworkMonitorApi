@@ -30,6 +30,8 @@ namespace NetworkMonitor.Api.Services
         Task<TResultObj<DataObj>> CheckDns(HostObject host);
         Task<TResultObj<DataObj>> CheckIcmp(HostObject host);
 
+        string OpenAIPluginServiceKey {get;set;}
+
     }
     public class ApiService : IApiService
     {
@@ -40,10 +42,19 @@ namespace NetworkMonitor.Api.Services
         private readonly PingParams _pingParams;
         private readonly NetConnectCollection _netConnectCollection;
         private string _frontEndUrl = "https://freenetworkmonior.click";
+        private string _openAIPluginServiceKey;
+
+        public string OpenAIPluginServiceKey { get => _openAIPluginServiceKey; set => _openAIPluginServiceKey = value; }
+
         public ApiService(IConfiguration config, INetLoggerFactory loggerFactory, IServiceScopeFactory scopeFactory, CancellationTokenSource cancellationTokenSource)
         {
             _config = config;
             _frontEndUrl = _config["FrontEndUrl"] != null ? _config["FrontEndUrl"] : _frontEndUrl;
+            OpenAIPluginServiceKey=_config["OpenAIPluginServiceKey"];
+            if (OpenAIPluginServiceKey!=null){
+                 
+                throw new ArgumentException(" Fatal error could not load OpenAIPluginServiceKey from appsettings.json");
+            }
             _token = cancellationTokenSource.Token;
             _token.Register(() => OnStopping());
             _scopeFactory = scopeFactory;

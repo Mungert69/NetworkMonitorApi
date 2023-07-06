@@ -28,6 +28,15 @@ namespace NetworkMonitor.Controllers
             _logger = loggerFactory.GetLogger("ChatController");
         }
 
+         private void AssertAuthHeader()
+        {
+            var authHeader = Request.Headers["Authorization"].FirstOrDefault();
+            if (authHeader != $"Bearer {_apiService.OpenAIPluginServiceKey}")
+            {
+                throw new UnauthorizedAccessException();
+            }
+        }
+
         // <snippet_CheckQuantum>
         /// <summary>
         /// Check if the supplied URL is using quantum-safe key encapsulation mechanisms.
@@ -53,6 +62,7 @@ namespace NetworkMonitor.Controllers
         {
             var result = new TResultObj<QuantumDataObj>();
             result.Message = " API : CheckQuantum :";
+            AssertAuthHeader();
             try
             {
                 result = await _apiService.CheckQuantum(urlObject);
@@ -94,6 +104,7 @@ namespace NetworkMonitor.Controllers
         {
             var result = new TResultObj<DataObj>();
             result.Message = " API : CheckSmtp :";
+            AssertAuthHeader();
             try
             {
                 result = await _apiService.CheckSmtp(hostObject);
@@ -133,6 +144,7 @@ namespace NetworkMonitor.Controllers
         {
             var result = new TResultObj<DataObj>();
             result.Message = " API : CheckHttp :";
+            AssertAuthHeader();
             try
             {
                 result = await _apiService.CheckHttp(hostObject);
@@ -172,6 +184,7 @@ namespace NetworkMonitor.Controllers
         {
             var result = new TResultObj<DataObj>();
             result.Message = " API : CheckDns :";
+            AssertAuthHeader();
             try
             {
                 result = await _apiService.CheckDns(hostObject);
@@ -212,6 +225,7 @@ namespace NetworkMonitor.Controllers
         {
             var result = new TResultObj<DataObj>();
             result.Message = " API : CheckIcmp :";
+            AssertAuthHeader();
             try
             {
                 result = await _apiService.CheckIcmp(hostObject);
