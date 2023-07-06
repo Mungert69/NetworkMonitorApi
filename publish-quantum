@@ -1,5 +1,5 @@
 systemctl stop NetworkMonitorApi.service
-rm -r * ../services/networkmonitorapi
+rm -r ../services/networkmonitorapi
 dotnet publish --os linux --arch x64  --output ../services/networkmonitorapi -c Release --self-contained true
 cp  ./wwwroot-quantum/* ../services/networkmonitorapi/wwwroot/
 mkdir ../services/networkmonitorapi/wwwroot/.well-known
