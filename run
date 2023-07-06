@@ -1,2 +1,2 @@
-sudo nohup ../services/NetworkMonitorApi &
+sudo nohup ../services/networkmonitorapi/NetworkMonitorApi &
 
