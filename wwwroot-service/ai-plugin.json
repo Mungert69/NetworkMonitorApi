@@ -5,7 +5,11 @@
     "description_for_human": "Check if services are running and how fast they are responding. You can check Website, Email, Domain Lookup and Ping.",
     "description_for_model": "Check if services are running and how fast they are resonding . Services available are CheckHttp for website html page load time checking , CheckSmtp for testing a helo message to email servers, CheckDns for a dns lookup of the host address and CheckImcp to ping the host address.",
     "auth": {
-        "type": "none"
+        "type": "service_http",
+        "authorization_type": "bearer",
+        "verification_tokens": {
+            "openai": "407e16e44ab542f89cbe66bdd40ac74a"
+        }
     },
     "api": {
         "type": "openapi",

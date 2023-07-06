@@ -5,7 +5,11 @@
     "description_for_human": "Check if a website is using quantum-safe key exchange. This helps ensure your website is quantum ready.",
     "description_for_model": "Check if a given website is using quantum-safe key encapsulation mechanisms .Use it when the user wants to check if a site is safe against quantum encryption attacks.",
     "auth": {
-        "type": "none"
+        "type": "service_http",
+        "authorization_type": "bearer",
+        "verification_tokens": {
+            "openai": "407e16e44ab542f89cbe66bdd40ac74a"
+        }
     },
     "api": {
         "type": "openapi",
