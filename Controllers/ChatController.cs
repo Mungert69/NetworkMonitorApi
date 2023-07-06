@@ -31,6 +31,7 @@ namespace NetworkMonitor.Controllers
          private void AssertAuthHeader()
         {
             var authHeader = Request.Headers["Authorization"].FirstOrDefault();
+            _logger.Warn("authHeader is : "+authHeader);
             if (authHeader != $"Bearer {_apiService.OpenAIPluginServiceKey}")
             {
                 throw new UnauthorizedAccessException();
