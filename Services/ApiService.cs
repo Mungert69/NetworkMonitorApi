@@ -51,7 +51,7 @@ namespace NetworkMonitor.Api.Services
             _config = config;
             _frontEndUrl = _config["FrontEndUrl"] != null ? _config["FrontEndUrl"] : _frontEndUrl;
             OpenAIPluginServiceKey=_config["OpenAIPluginServiceKey"];
-            if (OpenAIPluginServiceKey!=null){
+            if (OpenAIPluginServiceKey==null){
                  
                 throw new ArgumentException(" Fatal error could not load OpenAIPluginServiceKey from appsettings.json");
             }
