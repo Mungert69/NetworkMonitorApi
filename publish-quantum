@@ -1,0 +1,4 @@
+systemctl stop NetworkMonitorApi.service
+dotnet publish --os linux --arch x64  --output ../services/networkmonitorapi -c Release --self-contained true
+cp -r ./wwwroot-quantum/* ../services/networkmonitorapi/wwwroot/
+systemctl start NetworkMonitorApi.service
