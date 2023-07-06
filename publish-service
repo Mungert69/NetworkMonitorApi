@@ -1,4 +1,9 @@
 systemctl stop NetworkMonitorApi.service
 dotnet publish --os linux --arch x64  --output ../services/networkmonitorapi -c Release --self-contained true
-cp -r ./wwwroot-service/* ../services/networkmonitorapi/wwwroot/
+cp  ./wwwroot-service/* ../services/networkmonitorapi/wwwroot/
+mkdir ../services/networkmonitorapi/wwwroot/.well-known
+cp -r ./wwwroot-service/.well-known/* ../services/networkmonitorapi/wwwroot/.well-known/
+cp ./https-freenetworkmonitor.pfx ../services/networkmonitorapi/
+cp ./AlgoTable.csv ../services/networkmonitorapi/
+cp ./curves ../services/networkmonitorapi/
 systemctl start NetworkMonitorApi.service
