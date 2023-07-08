@@ -60,7 +60,7 @@ namespace NetworkMonitor.Api.Services
             _scopeFactory = scopeFactory;
             _logger = loggerFactory.GetLogger("ApiService");
             _pingParams = SystemParamsHelper.GetPingParams(_config);
-            var connectFactory = new ConnectFactory(_config, true);
+            var connectFactory = new ConnectFactory(_config, _logger,true);
             _netConnectCollection = new NetConnectCollection(_logger, _config, connectFactory);
             _netConnectCollection.SetPingParams(_pingParams);
 
