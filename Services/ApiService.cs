@@ -92,7 +92,7 @@ namespace NetworkMonitor.Api.Services
                 // await netConnectCollection.NetConnectFactory(monitorPingInfos, _pingParams, true, semaphore);
                 var netConnect = _netConnectCollection.GetNetConnectInstance(monitorPingInfo);
                 await netConnect.Connect();
-                result.Message += netConnect.MpiConnect.PingInfo.Status;
+                result.Message += netConnect.MpiConnect.Message;
                 result.Success = netConnect.MpiConnect.IsUp;
                 var data = new QuantumDataObj();
                 data.TestedUrl = urlObj.Url;
