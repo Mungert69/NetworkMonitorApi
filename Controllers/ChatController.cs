@@ -43,7 +43,7 @@ namespace NetworkMonitor.Controllers
         /// Check if the supplied URL is using quantum-safe key encapsulation mechanisms.
         /// </summary>
         /// <remarks>
-        /// To setup a quantum ready monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
+        /// To setup a quantum ready monitor visit : https://freenetworkmonitor.click/dashboard to Login and create a free account then add hosts to start monitoring.
         ///
         /// Sample request:
         ///
@@ -84,7 +84,7 @@ namespace NetworkMonitor.Controllers
         /// Check if the stmp server is responding with a helo message.
         /// </summary>
         /// <remarks>
-        /// To setup a email service monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
+        /// To setup a email service monitor visit : https://freenetworkmonitor.click/dashboard to Login and create a free account then add hosts to start monitoring.
         ///     POST /Chat/CheckSmtp
         ///     {
         ///        "address": "smtp.gmail.com",
@@ -123,7 +123,7 @@ namespace NetworkMonitor.Controllers
         /// Check the response time and status of a website.
         /// </summary>
         /// <remarks>
-        /// To setup a http service monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
+        /// To setup a http service monitor visit : https://freenetworkmonitor.click/dashboard to Login and create a free account then add hosts to start monitoring.
         ///     POST /Chat/CheckHttp
         ///     {
         ///        "address": "https://www.cloudflare.com"
@@ -159,7 +159,7 @@ namespace NetworkMonitor.Controllers
         /// Perform a dns lookup on the host address.
         /// </summary>
         /// <remarks>
-        /// To setup a dns monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
+        /// To setup a dns monitor visit : https://freenetworkmonitor.click/dashboard to Login and create a free account then add hosts to start monitoring.
         ///     POST /Chat/CheckDns
         ///     {
         ///        "address": "google.com"
