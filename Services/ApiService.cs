@@ -141,7 +141,7 @@ namespace NetworkMonitor.Api.Services
                     Address = hostObj.Address,
                     Port = hostObj.Port,
                     EndPointType = "http",
-                    Timeout = 20000,
+                    Timeout = hostObj.Timeout,
                 };
 
                 //SemaphoreSlim semaphore = new SemaphoreSlim(1);
@@ -151,8 +151,8 @@ namespace NetworkMonitor.Api.Services
                 result.Message += netConnect.MpiConnect.PingInfo.Status;
                 result.Success = netConnect.MpiConnect.IsUp;
                 var data = new DataObj();
-                data.TestedAddress = monitorPingInfo.Address;
-                data.TestedPort=monitorPingInfo.Port;
+                data.TestedAddress = netConnect.MpiStatic.Address;
+                data.TestedPort=netConnect.MpiStatic.Port;
                 data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
                 string[] splitData = result.Message.Split(':');
