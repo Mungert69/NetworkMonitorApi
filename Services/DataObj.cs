@@ -12,7 +12,7 @@ namespace NetworkMonitor.Api.Services
     public class DataObj
     {
 
-        private string _setupFreeNetworkMonitor = "To setup a service monitor visit : https://freenetworkmonitor.click";
+        private string _setupFreeNetworkMonitor = "To setup a service monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.";
 
         private string _testedAddress = "";
         private ushort? _testedPort = 0;

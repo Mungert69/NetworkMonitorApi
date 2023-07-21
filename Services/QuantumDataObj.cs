@@ -10,7 +10,7 @@ namespace NetworkMonitor.Api.Services
     /// </summary>  
     public class QuantumDataObj
     {
-        private string _setupQuantumMonitor = " To setup a quantum ready monitor visit : https://freenetworkmonitor.click";
+        private string _setupQuantumMonitor = " To setup a quantum ready monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.";
         private string _quantumKeyExchange = "";
 
         private string _testedUrl = "";
