@@ -6,20 +6,21 @@ using System.Threading.Tasks;
 namespace NetworkMonitor.Api.Services
 {
 
-        /// <summary>
-        /// Object that contains details about the check.
-        /// </summary>  
+    /// <summary>
+    /// Object that contains details about the check.
+    /// </summary>  
     public class DataObj
     {
-       
+
         private string _setupFreeNetworkMonitor = "To setup a service monitor visit : https://freenetworkmonitor.click";
 
         private string _testedAddress = "";
         private ushort? _testedPort = 0;
 
-        private ushort? responseTime = 0;
+        private int? responseTime = -1;
         private bool _resultSuccess = false;
         private string _resultStatus = "";
+        private int? _timeout = null;
 
         /// <summary>
         /// Indicates whether the check was successful.
@@ -42,14 +43,19 @@ namespace NetworkMonitor.Api.Services
         public ushort? TestedPort { get => _testedPort; set => _testedPort = value; }
 
         /// <summary>
-        /// The time taken to perform the test. This indicates the response time of the host service.
+        /// The time taken to perform the test in milliseconds. This indicates the response time of the host service. -1 indicates a timeout.
         /// </summary>  
-        public ushort? ResponseTime { get => responseTime; set => responseTime = value; }
+        public int? ResponseTime { get => responseTime; set => responseTime = value; }
 
         /// <summary>
         /// Instructions for setting up a free network monitor.
         /// </summary>  
         public string SetupFreeNetworkMonitor { get => _setupFreeNetworkMonitor; set => _setupFreeNetworkMonitor = value; }
+
+        /// <summary>
+        /// The timeout value used in milliseconds.
+        /// </summary>
+        public int? Timeout { get => _timeout; set => _timeout = value; }
     }
 
 

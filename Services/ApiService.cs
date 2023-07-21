@@ -97,6 +97,8 @@ namespace NetworkMonitor.Api.Services
                 var data = new QuantumDataObj();
                 data.TestedUrl = urlObj.Url;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
+                if (netConnect.MpiConnect.PingInfo.RoundTripTime!=UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                else data.Timeout=netConnect.MpiStatic.Timeout;
                 string[] splitData = result.Message.Split(':');
                 if (splitData.Length > 3)
                 {
@@ -153,7 +155,8 @@ namespace NetworkMonitor.Api.Services
                 var data = new DataObj();
                 data.TestedAddress = netConnect.MpiStatic.Address;
                 data.TestedPort=netConnect.MpiStatic.Port;
-                data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                if (netConnect.MpiConnect.PingInfo.RoundTripTime!=UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                else data.Timeout=netConnect.MpiStatic.Timeout;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
                 string[] splitData = result.Message.Split(':');
                 if (splitData.Length > 2)
@@ -198,7 +201,8 @@ namespace NetworkMonitor.Api.Services
                 data.TestedAddress = hostObj.Address;
                 data.TestedPort = hostObj.Port;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
-                data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                 if (netConnect.MpiConnect.PingInfo.RoundTripTime!=UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                else data.Timeout=netConnect.MpiStatic.Timeout;
                 string[] splitData = result.Message.Split(':');
                 if (splitData.Length > 2)
                 {
@@ -242,7 +246,8 @@ namespace NetworkMonitor.Api.Services
                 data.TestedAddress = hostObj.Address;
                 data.TestedPort = hostObj.Port;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
-                data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                 if (netConnect.MpiConnect.PingInfo.RoundTripTime!=UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                else data.Timeout=netConnect.MpiStatic.Timeout;
                 string[] splitData = result.Message.Split(':');
                 if (splitData.Length > 2)
                 {
@@ -285,7 +290,8 @@ namespace NetworkMonitor.Api.Services
                 data.TestedAddress = hostObj.Address;
                 data.TestedPort = hostObj.Port;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
-                data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                 if (netConnect.MpiConnect.PingInfo.RoundTripTime!=UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                else data.Timeout=netConnect.MpiStatic.Timeout;
                string[] splitData = result.Message.Split(new char[] {':'}, 3);
                 if (splitData.Length > 2 )
                 {
