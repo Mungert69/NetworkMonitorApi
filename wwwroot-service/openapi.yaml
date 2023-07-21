@@ -446,14 +446,17 @@
         "properties": {
           "address": {
             "type": "string",
+            "description": "This field is required.\r\nAddress of the host.",
             "nullable": true
           },
           "port": {
             "type": "integer",
+            "description": "This field is optional.\r\nPort used by the host service to test. Set to zero to use the default for the end point type.",
             "format": "int32"
           },
           "timeout": {
             "type": "integer",
+            "description": "This field is optional.\r\nThe timeout in milliseconds to be used when testing this host service. The default is not included is to set the timeout to 10000 ms.",
             "format": "int32"
           }
         },
