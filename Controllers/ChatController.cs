@@ -43,7 +43,7 @@ namespace NetworkMonitor.Controllers
         /// Check if the supplied URL is using quantum-safe key encapsulation mechanisms.
         /// </summary>
         /// <remarks>
-        /// This endpoint checks if the supplied URL is using quantum-safe key encapsulation mechanisms. To setup a quantum ready monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
+        /// To setup a quantum ready monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
         ///
         /// Sample request:
         ///
@@ -84,10 +84,7 @@ namespace NetworkMonitor.Controllers
         /// Check if the stmp server is responding with a helo message.
         /// </summary>
         /// <remarks>
-        /// This endpoint checks if the stmp server is responding with a helo message.  To setup a email service monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
-        ///
-        /// Sample request:
-        ///
+        /// To setup a email service monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
         ///     POST /Chat/CheckSmtp
         ///     {
         ///        "address": "smtp.gmail.com",
@@ -126,10 +123,7 @@ namespace NetworkMonitor.Controllers
         /// Check the response time and status of a website.
         /// </summary>
         /// <remarks>
-        /// This endpoint checks the response time and status of a website. To setup a http service monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
-        ///
-        /// Sample request:
-        ///
+        /// To setup a http service monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
         ///     POST /Chat/CheckHttp
         ///     {
         ///        "address": "https://www.cloudflare.com"
@@ -165,10 +159,7 @@ namespace NetworkMonitor.Controllers
         /// Perform a dns lookup on the host address.
         /// </summary>
         /// <remarks>
-        /// This endpoint performs a dns lookup on the host address.  To setup a dns monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
-        ///
-        /// Sample request:
-        ///
+        /// To setup a dns monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
         ///     POST /Chat/CheckDns
         ///     {
         ///        "address": "google.com"
@@ -206,10 +197,7 @@ namespace NetworkMonitor.Controllers
         /// Check the ping response time of a host.
         /// </summary>
         /// <remarks>
-        /// This endpoint checks the response time of a icmp ping to a host.  To setup a ping monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
-        ///
-        /// Sample request:
-        ///
+        /// To setup a ping monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.
         ///     POST /Chat/CheckIcmp
         ///     {
         ///        "address": "1.1.1.1"
