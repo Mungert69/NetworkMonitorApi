@@ -22,7 +22,7 @@
           "Chat"
         ],
         "summary": "Check if the supplied URL is using quantum-safe key encapsulation mechanisms.",
-        "description": "This endpoint checks if the supplied URL is using quantum-safe key encapsulation mechanisms. To setup a quantum ready monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.\r\n            \r\nSample request:\r\n            \r\n    POST /Chat/CheckQuantum\r\n    {\r\n       \"url\": \"https://cloudflare.com\"\r\n    }",
+        "description": "To setup a quantum ready monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.\r\n            \r\nSample request:\r\n            \r\n    POST /Chat/CheckQuantum\r\n    {\r\n       \"url\": \"https://cloudflare.com\"\r\n    }",
         "operationId": "CheckQuantumOperation",
         "requestBody": {
           "content": {
@@ -93,7 +93,7 @@
           "Chat"
         ],
         "summary": "Check if the stmp server is responding with a helo message.",
-        "description": "This endpoint checks if the stmp server is responding with a helo message.  To setup a email service monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.\r\n            \r\nSample request:\r\n            \r\n    POST /Chat/CheckSmtp\r\n    {\r\n       \"address\": \"smtp.gmail.com\",\r\n       \"port\": 587,\r\n    }",
+        "description": "To setup a email service monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.\r\n    POST /Chat/CheckSmtp\r\n    {\r\n       \"address\": \"smtp.gmail.com\",\r\n       \"port\": 587,\r\n    }",
         "operationId": "CheckSmtpOperation",
         "requestBody": {
           "content": {
@@ -164,7 +164,7 @@
           "Chat"
         ],
         "summary": "Check the response time and status of a website.",
-        "description": "This endpoint checks the response time and status of a website. To setup a http service monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.\r\n            \r\nSample request:\r\n            \r\n    POST /Chat/CheckHttp\r\n    {\r\n       \"address\": \"https://www.cloudflare.com\"\r\n    }",
+        "description": "To setup a http service monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.\r\n    POST /Chat/CheckHttp\r\n    {\r\n       \"address\": \"https://www.cloudflare.com\"\r\n    }",
         "operationId": "CheckHttpOperation",
         "requestBody": {
           "content": {
@@ -235,7 +235,7 @@
           "Chat"
         ],
         "summary": "Perform a dns lookup on the host address.",
-        "description": "This endpoint performs a dns lookup on the host address.  To setup a dns monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.\r\n            \r\nSample request:\r\n            \r\n    POST /Chat/CheckDns\r\n    {\r\n       \"address\": \"google.com\"\r\n    }",
+        "description": "To setup a dns monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.\r\n    POST /Chat/CheckDns\r\n    {\r\n       \"address\": \"google.com\"\r\n    }",
         "operationId": "CheckDnsOperation",
         "requestBody": {
           "content": {
@@ -306,7 +306,7 @@
           "Chat"
         ],
         "summary": "Check the ping response time of a host.",
-        "description": "This endpoint checks the response time of a icmp ping to a host.  To setup a ping monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.\r\n            \r\nSample request:\r\n            \r\n    POST /Chat/CheckIcmp\r\n    {\r\n       \"address\": \"1.1.1.1\"\r\n    }",
+        "description": "To setup a ping monitor visit : https://freenetworkmonitor.click/dashboard . You can Login to create a free account and then add hosts to monitor.\r\n    POST /Chat/CheckIcmp\r\n    {\r\n       \"address\": \"1.1.1.1\"\r\n    }",
         "operationId": "CheckIcmpOperation",
         "requestBody": {
           "content": {
