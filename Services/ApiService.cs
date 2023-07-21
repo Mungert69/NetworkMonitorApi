@@ -123,14 +123,14 @@ namespace NetworkMonitor.Api.Services
        public async Task<TResultObj<DataObj>> CheckHttp(HostObject hostObj)
         {
             var result = new TResultObj<DataObj>();
-            var urlObj= new UrlObject();
+            /*var urlObj= new UrlObject();
             urlObj.Url=hostObj.Address;
             // some convoluted logic due to way HttpConnect handles urls.
             if (hostObj.Port == 0) hostObj.Port = urlObj.Port;
             if (urlObj.Port==80 || urlObj.Port==443)
             {
                 hostObj.Port = 0;
-            }
+            }*/
             result.Message = " SERVICE : CheckHttp : ";
             try
             {
@@ -138,9 +138,9 @@ namespace NetworkMonitor.Api.Services
                 //monitorPingInfos.Add();
                 var monitorPingInfo = new MonitorPingInfo()
                 {
-                    Address = urlObj.Url,
+                    Address = hostObj.Address,
                     Port = hostObj.Port,
-                    EndPointType = "httphtml",
+                    EndPointType = "http",
                     Timeout = 20000,
                 };
 
@@ -151,7 +151,7 @@ namespace NetworkMonitor.Api.Services
                 result.Message += netConnect.MpiConnect.PingInfo.Status;
                 result.Success = netConnect.MpiConnect.IsUp;
                 var data = new DataObj();
-                data.TestedAddress = hostObj.Address;
+                data.TestedAddress = monitorPingInfo.Address;
                 data.TestedPort=monitorPingInfo.Port;
                 data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
