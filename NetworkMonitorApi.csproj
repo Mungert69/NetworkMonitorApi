@@ -4,8 +4,10 @@
     <TargetFramework>netcoreapp7.0</TargetFramework>
     <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
       <StartupObject>NetworkMonitor.Api.Program</StartupObject>
+       <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:7.0-jammy-amd64</ContainerBaseImage>
+    <ContainerImageName>mungert/networkmonitorapi</ContainerImageName>
+    <ContainerImageTag>1.0.0</ContainerImageTag>
 </PropertyGroup>
-
  <!-- <snippet_SuppressWarnings> -->
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -16,7 +18,7 @@
   <ItemGroup>
     <PackageReference Include="HostInitActions" Version="1.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-   
+    <PackageReference Include="Microsoft.NET.Build.Containers" Version="7.0.401" />
    </ItemGroup>
 
    <ItemGroup>
