@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <PackageReference Include="HostInitActions" Version="1.2.0" />
-    <PackageReference Include="Microsoft.NET.Build.Containers" Version="0.2.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
    
    </ItemGroup>
