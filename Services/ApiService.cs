@@ -41,14 +41,16 @@ namespace NetworkMonitor.Api.Services
         private readonly CancellationToken _token;
         private readonly PingParams _pingParams;
         private readonly NetConnectCollection _netConnectCollection;
+        private ISystemParamsHelper _systemParamsHelper;
         private string _frontEndUrl = "https://freenetworkmonior.click";
         private string _openAIPluginServiceKey;
 
         public string OpenAIPluginServiceKey { get => _openAIPluginServiceKey; set => _openAIPluginServiceKey = value; }
 
-        public ApiService(IConfiguration config, INetLoggerFactory loggerFactory, IServiceScopeFactory scopeFactory, CancellationTokenSource cancellationTokenSource)
+        public ApiService(IConfiguration config, INetLoggerFactory loggerFactory, IServiceScopeFactory scopeFactory, CancellationTokenSource cancellationTokenSource,ISystemParamsHelper systemParamsHelper)
         {
             _config = config;
+            _systemParamsHelper=systemParamsHelper;
             _frontEndUrl = _config["FrontEndUrl"] != null ? _config["FrontEndUrl"] : _frontEndUrl;
             OpenAIPluginServiceKey=_config["OpenAIPluginServiceKey"];
             if (OpenAIPluginServiceKey==null){
@@ -59,7 +61,7 @@ namespace NetworkMonitor.Api.Services
             _token.Register(() => OnStopping());
             _scopeFactory = scopeFactory;
             _logger = loggerFactory.GetLogger("ApiService");
-            _pingParams = SystemParamsHelper.GetPingParams(_config);
+            _pingParams = _systemParamsHelper.GetPingParams();
             var connectFactory = new ConnectFactory(_config, _logger,true);
             _netConnectCollection = new NetConnectCollection(_logger, _config, connectFactory);
             _netConnectCollection.SetPingParams(_pingParams);

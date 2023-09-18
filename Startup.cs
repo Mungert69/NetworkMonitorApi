@@ -18,8 +18,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using System.IO;
 using System.Reflection;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using NetworkMonitor.Utils.Helpers;
 
 namespace NetworkMonitor.Api
 {
@@ -47,6 +46,7 @@ namespace NetworkMonitor.Api
             });
             services.AddSingleton<INetLoggerFactory, NetLoggerFactory>();
             services.AddSingleton<IApiService, ApiService>();
+            services.AddSingleton<ISystemParamsHelper, SystemParamsHelper>();
             services.AddSingleton(_cancellationTokenSource);
 
             services.Configure<HostOptions>(s => s.ShutdownTimeout = TimeSpan.FromMinutes(5));
