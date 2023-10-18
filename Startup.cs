@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Threading;
 using NetworkMonitor.Utils;
-using NetworkMonitor.Auth;
 using NetworkMonitor.Objects.Factory;
 using HostInitActions;
 using Microsoft.Extensions.FileProviders;

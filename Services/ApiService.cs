@@ -6,7 +6,6 @@ using NetworkMonitor.Objects.ServiceMessage;
 using NetworkMonitor.Connection;
 using NetworkMonitor.Utils.Helpers;
 using System.Web;
-using Newtonsoft.Json;
 using MetroLog;
 using NetworkMonitor.Objects.Factory;
 using System.Text.RegularExpressions;
