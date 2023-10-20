@@ -8,6 +8,10 @@
     <ContainerImageName>mungert/networkmonitorapi</ContainerImageName>
     <ContainerImageTag>1.1.0</ContainerImageTag>
 </PropertyGroup>
+
+<PropertyGroup>
+    <Nullable>enable</Nullable>
+</PropertyGroup>
  <!-- <snippet_SuppressWarnings> -->
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
