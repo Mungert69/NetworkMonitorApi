@@ -6,7 +6,7 @@
       <StartupObject>NetworkMonitor.Api.Program</StartupObject>
        <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:7.0-jammy-amd64</ContainerBaseImage>
     <ContainerImageName>mungert/networkmonitorapi</ContainerImageName>
-    <ContainerImageTag>1.0.1</ContainerImageTag>
+    <ContainerImageTag>1.1.0</ContainerImageTag>
 </PropertyGroup>
  <!-- <snippet_SuppressWarnings> -->
   <PropertyGroup>
