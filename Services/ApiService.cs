@@ -6,7 +6,7 @@ using NetworkMonitor.Objects.ServiceMessage;
 using NetworkMonitor.Connection;
 using NetworkMonitor.Utils.Helpers;
 using System.Web;
-using MetroLog;
+using Microsoft.Extensions.Logging;
 using NetworkMonitor.Objects.Factory;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +36,7 @@ namespace NetworkMonitor.Api.Services
     {
         private readonly IConfiguration _config;
         private readonly ILogger _logger;
+        private readonly ILoggerFactory _loggerFactory;
         private readonly IServiceScopeFactory _scopeFactory;
         private readonly CancellationToken _token;
         private readonly PingParams _pingParams;
@@ -46,7 +47,7 @@ namespace NetworkMonitor.Api.Services
 
         public string OpenAIPluginServiceKey { get => _openAIPluginServiceKey; set => _openAIPluginServiceKey = value; }
 
-        public ApiService(IConfiguration config, INetLoggerFactory loggerFactory, IServiceScopeFactory scopeFactory, CancellationTokenSource cancellationTokenSource,ISystemParamsHelper systemParamsHelper)
+        public ApiService(IConfiguration config, ILogger<ApiService> logger,ILoggerFactory loggerFactory, IServiceScopeFactory scopeFactory, CancellationTokenSource cancellationTokenSource,ISystemParamsHelper systemParamsHelper)
         {
             _config = config;
             _systemParamsHelper=systemParamsHelper;
@@ -59,10 +60,11 @@ namespace NetworkMonitor.Api.Services
             _token = cancellationTokenSource.Token;
             _token.Register(() => OnStopping());
             _scopeFactory = scopeFactory;
-            _logger = loggerFactory.GetLogger("ApiService");
+            _logger = logger;
+            _loggerFactory=loggerFactory;
             _pingParams = _systemParamsHelper.GetPingParams();
-            var connectFactory = new ConnectFactory(_config, _logger,true);
-            _netConnectCollection = new NetConnectCollection(_logger, _config, connectFactory);
+            var connectFactory = new ConnectFactory(_config, _loggerFactory.CreateLogger<ConnectFactory>(),true);
+            _netConnectCollection = new NetConnectCollection(_loggerFactory.CreateLogger<NetConnectCollection>(), _config, connectFactory);
             _netConnectCollection.SetPingParams(_pingParams);
 
 
@@ -71,7 +73,7 @@ namespace NetworkMonitor.Api.Services
         // OnStopping() method
         public void OnStopping()
         {
-            _logger.Info("OnStopping");
+            _logger.LogInformation("OnStopping");
         }
         public async Task<TResultObj<QuantumDataObj>> CheckQuantum(UrlObject urlObj)
         {
@@ -116,7 +118,7 @@ namespace NetworkMonitor.Api.Services
             {
                 result.Success = false;
                 result.Message += " Error : " + ex.Message;
-                _logger.Error(result.Message);
+                _logger.LogError(result.Message);
 
             }
             return result;
@@ -171,7 +173,7 @@ namespace NetworkMonitor.Api.Services
             {
                 result.Success = false;
                 result.Message += " Error : " + ex.Message;
-                _logger.Error(result.Message);
+                _logger.LogError(result.Message);
 
             }
             return result;
@@ -216,7 +218,7 @@ namespace NetworkMonitor.Api.Services
             {
                 result.Success = false;
                 result.Message += " Error : " + ex.Message;
-                _logger.Error(result.Message);
+                _logger.LogError(result.Message);
 
             }
             return result;
@@ -261,7 +263,7 @@ namespace NetworkMonitor.Api.Services
             {
                 result.Success = false;
                 result.Message += " Error : " + ex.Message;
-                _logger.Error(result.Message);
+                _logger.LogError(result.Message);
 
             }
             return result;
@@ -307,7 +309,7 @@ namespace NetworkMonitor.Api.Services
             {
                 result.Success = false;
                 result.Message += " Error : " + ex.Message;
-                _logger.Error(result.Message);
+                _logger.LogError(result.Message);
 
             }
             return result;

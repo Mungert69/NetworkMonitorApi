@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using MetroLog;
+using Microsoft.Extensions.Logging;
 using NetworkMonitor.Objects;
 using NetworkMonitor.Objects.Factory;
 using NetworkMonitor.Api.Services;
@@ -22,16 +22,16 @@ namespace NetworkMonitor.Controllers
         private readonly ILogger _logger;
         private IApiService _apiService;
 
-        public ChatController(INetLoggerFactory loggerFactory, IApiService apiService)
+        public ChatController(ILogger<ChatController> logger, IApiService apiService)
         {
             _apiService = apiService;
-            _logger = loggerFactory.GetLogger("ChatController");
+            _logger = logger;
         }
 
          private void AssertAuthHeader()
         {
             var authHeader = Request.Headers["Authorization"].FirstOrDefault();
-            //_logger.Warn("authHeader is : "+authHeader);
+            //_logger.LogWarning("authHeader is : "+authHeader);
             if (authHeader != $"Bearer {_apiService.OpenAIPluginServiceKey}")
             {
                 throw new UnauthorizedAccessException();
@@ -73,7 +73,7 @@ namespace NetworkMonitor.Controllers
                 result.Message += " Error : Failed to check quantum. Error was : " + ex.Message;
                 result.Success = false;
             }
-            _logger.Info(result.Message);
+            _logger.LogInformation(result.Message);
             return result;
         }
         // </snippet_CheckQuantum>
@@ -112,7 +112,7 @@ namespace NetworkMonitor.Controllers
                 result.Message += " Error : Failed to check smtp. Error was : " + ex.Message;
                 result.Success = false;
             }
-            _logger.Info(result.Message);
+            _logger.LogInformation(result.Message);
             return result;
         }
         // </snippet_CheckSmtp>
@@ -149,7 +149,7 @@ namespace NetworkMonitor.Controllers
                 result.Message += " Error : Failed to check http. Error was : " + ex.Message;
                 result.Success = false;
             }
-            _logger.Info(result.Message);
+            _logger.LogInformation(result.Message);
             return result;
         }
 
@@ -186,7 +186,7 @@ namespace NetworkMonitor.Controllers
                 result.Message += " Error : Failed to check dns. Error was : " + ex.Message;
                 result.Success = false;
             }
-            _logger.Info(result.Message);
+            _logger.LogInformation(result.Message);
             return result;
         }
         // </snippet_CheckDns>
@@ -224,7 +224,7 @@ namespace NetworkMonitor.Controllers
                 result.Message += " Error : Failed to check icmp. Error was : " + ex.Message;
                 result.Success = false;
             }
-            _logger.Info(result.Message);
+            _logger.LogInformation(result.Message);
             return result;
         }
         // </snippet_CheckIcmp>

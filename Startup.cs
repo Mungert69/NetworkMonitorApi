@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.Logging;
 using NetworkMonitor.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -38,12 +39,15 @@ namespace NetworkMonitor.Api
         public void ConfigureServices(IServiceCollection services)
         {
             _services = services;
+              services.AddLogging(builder =>
+                {
+                    builder.AddConsole();
+                });
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAnyOrigin",
                     builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
-            services.AddSingleton<INetLoggerFactory, NetLoggerFactory>();
             services.AddSingleton<IApiService, ApiService>();
             services.AddSingleton<ISystemParamsHelper, SystemParamsHelper>();
             services.AddSingleton(_cancellationTokenSource);
