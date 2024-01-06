@@ -4,9 +4,9 @@
     <TargetFramework>netcoreapp8.0</TargetFramework>
     <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
       <StartupObject>NetworkMonitor.Api.Program</StartupObject>
-       <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-jammy-amd64</ContainerBaseImage>
+       <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0</ContainerBaseImage>
     <ContainerImageName>mungert/networkmonitorapi</ContainerImageName>
-    <ContainerImageTag>1.2.0</ContainerImageTag>
+    <ContainerImageTag>1.3.0</ContainerImageTag>
 </PropertyGroup>
 
 <PropertyGroup>

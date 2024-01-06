@@ -29,7 +29,7 @@ namespace NetworkMonitor.Api.Services
         Task<TResultObj<DataObj>> CheckDns(HostObject host);
         Task<TResultObj<DataObj>> CheckIcmp(HostObject host);
 
-        string OpenAIPluginServiceKey {get;set;}
+        string OpenAIPluginServiceKey { get; set; }
 
     }
     public class ApiService : IApiService
@@ -47,25 +47,32 @@ namespace NetworkMonitor.Api.Services
 
         public string OpenAIPluginServiceKey { get => _openAIPluginServiceKey; set => _openAIPluginServiceKey = value; }
 
-        public ApiService(IConfiguration config, ILogger<ApiService> logger,ILoggerFactory loggerFactory, IServiceScopeFactory scopeFactory, CancellationTokenSource cancellationTokenSource,ISystemParamsHelper systemParamsHelper)
+        public ApiService(IConfiguration config, ILogger<ApiService> logger, ILoggerFactory loggerFactory, IServiceScopeFactory scopeFactory, CancellationTokenSource cancellationTokenSource, ISystemParamsHelper systemParamsHelper)
         {
             _config = config;
-            _systemParamsHelper=systemParamsHelper;
+            _systemParamsHelper = systemParamsHelper;
             _frontEndUrl = _config["FrontEndUrl"] != null ? _config["FrontEndUrl"] : _frontEndUrl;
-            OpenAIPluginServiceKey=_config["OpenAIPluginServiceKey"];
-            if (OpenAIPluginServiceKey==null){
-                 
+            OpenAIPluginServiceKey = _config["OpenAIPluginServiceKey"];
+            if (OpenAIPluginServiceKey == null)
+            {
+
                 throw new ArgumentException(" Fatal error could not load OpenAIPluginServiceKey from appsettings.json");
             }
             _token = cancellationTokenSource.Token;
             _token.Register(() => OnStopping());
             _scopeFactory = scopeFactory;
             _logger = logger;
-            _loggerFactory=loggerFactory;
+            _loggerFactory = loggerFactory;
             _pingParams = _systemParamsHelper.GetPingParams();
-            var connectFactory = new ConnectFactory(_config, _loggerFactory.CreateLogger<ConnectFactory>(),true);
-            _netConnectCollection = new NetConnectCollection(_loggerFactory.CreateLogger<NetConnectCollection>(), _config, connectFactory);
-            _netConnectCollection.SetPingParams(_pingParams);
+            var netConnectConfig = new NetConnectConfig(_config);
+            var connectFactory = new ConnectFactory(_logger, false);
+            var netConnectCollection = new NetConnectCollection(_logger, netConnectConfig, connectFactory);
+            if (_netConnectCollection != null)
+                _netConnectCollection.SetPingParams(_pingParams);
+            else
+            {
+                throw new ArgumentException(" Failed to create NetConnectCollection setup of it returned null");
+            }
 
 
         }
@@ -100,8 +107,8 @@ namespace NetworkMonitor.Api.Services
                 var data = new QuantumDataObj();
                 data.TestedUrl = urlObj.Url;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
-                if (netConnect.MpiConnect.PingInfo.RoundTripTime!=UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
-                else data.Timeout=netConnect.MpiStatic.Timeout;
+                if (netConnect.MpiConnect.PingInfo.RoundTripTime != UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                else data.Timeout = netConnect.MpiStatic.Timeout;
                 string[] splitData = result.Message.Split(':');
                 if (splitData.Length > 3)
                 {
@@ -125,7 +132,7 @@ namespace NetworkMonitor.Api.Services
         }
 
 
-       public async Task<TResultObj<DataObj>> CheckHttp(HostObject hostObj)
+        public async Task<TResultObj<DataObj>> CheckHttp(HostObject hostObj)
         {
             var result = new TResultObj<DataObj>();
             /*var urlObj= new UrlObject();
@@ -157,9 +164,9 @@ namespace NetworkMonitor.Api.Services
                 result.Success = netConnect.MpiConnect.IsUp;
                 var data = new DataObj();
                 data.TestedAddress = netConnect.MpiStatic.Address;
-                data.TestedPort=netConnect.MpiStatic.Port;
-                if (netConnect.MpiConnect.PingInfo.RoundTripTime!=UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
-                else data.Timeout=netConnect.MpiStatic.Timeout;
+                data.TestedPort = netConnect.MpiStatic.Port;
+                if (netConnect.MpiConnect.PingInfo.RoundTripTime != UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                else data.Timeout = netConnect.MpiStatic.Timeout;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
                 string[] splitData = result.Message.Split(':');
                 if (splitData.Length > 2)
@@ -204,8 +211,8 @@ namespace NetworkMonitor.Api.Services
                 data.TestedAddress = hostObj.Address;
                 data.TestedPort = hostObj.Port;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
-                 if (netConnect.MpiConnect.PingInfo.RoundTripTime!=UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
-                else data.Timeout=netConnect.MpiStatic.Timeout;
+                if (netConnect.MpiConnect.PingInfo.RoundTripTime != UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                else data.Timeout = netConnect.MpiStatic.Timeout;
                 string[] splitData = result.Message.Split(':');
                 if (splitData.Length > 2)
                 {
@@ -249,8 +256,8 @@ namespace NetworkMonitor.Api.Services
                 data.TestedAddress = hostObj.Address;
                 data.TestedPort = hostObj.Port;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
-                 if (netConnect.MpiConnect.PingInfo.RoundTripTime!=UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
-                else data.Timeout=netConnect.MpiStatic.Timeout;
+                if (netConnect.MpiConnect.PingInfo.RoundTripTime != UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                else data.Timeout = netConnect.MpiStatic.Timeout;
                 string[] splitData = result.Message.Split(':');
                 if (splitData.Length > 2)
                 {
@@ -293,14 +300,14 @@ namespace NetworkMonitor.Api.Services
                 data.TestedAddress = hostObj.Address;
                 data.TestedPort = hostObj.Port;
                 data.ResultSuccess = netConnect.MpiConnect.IsUp;
-                 if (netConnect.MpiConnect.PingInfo.RoundTripTime!=UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
-                else data.Timeout=netConnect.MpiStatic.Timeout;
-               string[] splitData = result.Message.Split(new char[] {':'}, 3);
-                if (splitData.Length > 2 )
+                if (netConnect.MpiConnect.PingInfo.RoundTripTime != UInt16.MaxValue) data.ResponseTime = netConnect.MpiConnect.PingInfo.RoundTripTime;
+                else data.Timeout = netConnect.MpiStatic.Timeout;
+                string[] splitData = result.Message.Split(new char[] { ':' }, 3);
+                if (splitData.Length > 2)
                 {
-                    if ( netConnect.MpiConnect.IsUp)
-                  data.ResultStatus="Resolved addresses : "+splitData[2];
-                  else data.ResultStatus=splitData[2];
+                    if (netConnect.MpiConnect.IsUp)
+                        data.ResultStatus = "Resolved addresses : " + splitData[2];
+                    else data.ResultStatus = splitData[2];
                 }
                 result.Data = data;
             }
