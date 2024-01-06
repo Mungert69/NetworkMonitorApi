@@ -65,7 +65,7 @@ namespace NetworkMonitor.Api.Services
             _loggerFactory = loggerFactory;
             _pingParams = _systemParamsHelper.GetPingParams();
             var netConnectConfig = new NetConnectConfig(_config);
-            var connectFactory = new ConnectFactory(_logger, false);
+            var connectFactory = new ConnectFactory(_logger, true);
             _netConnectCollection = new NetConnectCollection(_logger, netConnectConfig, connectFactory);
             if (_netConnectCollection != null)
                 _netConnectCollection.SetPingParams(_pingParams);
