@@ -30,11 +30,7 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	 </ItemGroup>
-   <ItemGroup>
-	  <None Update="appsettings-Development.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	 </ItemGroup>
+   
 
    <ItemGroup>
     <ProjectReference Include="..\NetworkMonitor\NetworkMonitor.csproj" />
