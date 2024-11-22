@@ -59,14 +59,14 @@ namespace NetworkMonitor.Controllers
         [HttpPost("CheckQuantum",Name = "CheckQuantumOperation")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<TResultObj<QuantumDataObj>> CheckQuantum([FromBody] UrlObject urlObject)
+        public async Task<TResultObj<QuantumDataObj>> CheckQuantum([FromBody] QuantumHostObject quantumHostObject)
         {
             var result = new TResultObj<QuantumDataObj>();
             result.Message = " API : CheckQuantum :";
             AssertAuthHeader();
             try
             {
-                result = await _apiService.CheckQuantum(urlObject);
+                result = await _apiService.CheckQuantum(quantumHostObject);
             }
             catch (Exception ex)
             {
