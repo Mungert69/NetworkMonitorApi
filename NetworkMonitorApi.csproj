@@ -5,7 +5,7 @@
     <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
       <StartupObject>NetworkMonitor.Api.Program</StartupObject>
        <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:9.0</ContainerBaseImage>
-    <ContainerImageTag>1.4.0</ContainerImageTag>
+    <ContainerImageTag>1.4.1</ContainerImageTag>
         <PublishProfile>DefaultContainer</PublishProfile>
 
 </PropertyGroup>

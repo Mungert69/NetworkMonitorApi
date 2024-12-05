@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             "requireExactSource" :false,
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp7.0/linux-x64/NetworkMonitorApi.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp9.0/linux-x64/NetworkMonitorApi.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
