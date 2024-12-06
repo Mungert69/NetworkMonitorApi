@@ -7,12 +7,15 @@
        <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:9.0</ContainerBaseImage>
     <ContainerImageTag>1.4.1</ContainerImageTag>
         <PublishProfile>DefaultContainer</PublishProfile>
+         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+
 
 </PropertyGroup>
  <!-- Conditional AOT and optimization for Release configuration -->
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <Optimize>true</Optimize>
-      <ContainerImageName>mungert/networkmonitorapi</ContainerImageName>
+      <ContainerRepository>mungert/networkmonitorapi</ContainerRepository>
   
   </PropertyGroup>
 
@@ -20,7 +23,7 @@
 <PropertyGroup Condition="'$(Configuration)'=='Release-Dev'">
     <DefineConstants>DEV</DefineConstants>
         <Optimize>true</Optimize>
-         <ContainerImageName>mungert/networkmonitorapi-dev</ContainerImageName>
+         <ContainerRepository>mungert/networkmonitorapi-dev</ContainerRepository>
 </PropertyGroup>
 
 <PropertyGroup>
@@ -45,6 +48,13 @@
 	  </None>
 	 </ItemGroup>
    
+ <ItemGroup>
+    <Content Include="..\NetworkMonitorProcessor\openssl-3.3.1\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <TargetPath>openssl\%(RecursiveDir)%(Filename)%(Extension)</TargetPath>
+    </Content>
+  </ItemGroup>
 
    <ItemGroup>
     <ProjectReference Include="..\NetworkMonitor\NetworkMonitor.csproj" />

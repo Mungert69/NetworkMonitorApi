@@ -19,6 +19,9 @@ using Microsoft.OpenApi.Models;
 using System.IO;
 using System.Reflection;
 using NetworkMonitor.Utils.Helpers;
+using NetworkMonitor.Objects.Repository;
+using NetworkMonitor.Connection;
+using NetworkMonitor.Objects;
 
 namespace NetworkMonitor.Api
 {
@@ -51,6 +54,35 @@ namespace NetworkMonitor.Api
             services.AddSingleton<IApiService, ApiService>();
             services.AddSingleton<ISystemParamsHelper, SystemParamsHelper>();
             services.AddSingleton(_cancellationTokenSource);
+            services.AddSingleton<IRabbitRepo, RabbitRepo>();
+            services.AddSingleton(new LocalProcessorStates());
+
+            services.AddSingleton<NetConnectConfig>(provider =>
+            {
+                // Assuming Configuration is properly set up
+                var configuration = provider.GetRequiredService<IConfiguration>();
+               string appDataDirectory = "";
+                if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
+                {
+                    // Set your custom directory for the Docker environment
+                    appDataDirectory = "";
+                }
+                else
+                {
+                    // Fallback to the regular path on non-containerized environments
+                    appDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                }
+                return new NetConnectConfig(configuration, appDataDirectory);
+            });
+            services.AddSingleton<ICmdProcessorProvider,CmdProcessorFactory>();
+             
+            services.AddSingleton<IRabbitRepo>(provider =>
+           {
+               var logger = provider.GetRequiredService<ILogger<RabbitRepo>>();
+               var netConfig = provider.GetRequiredService<NetConnectConfig>();
+               // Choose the appropriate constructor
+               return new RabbitRepo(logger, netConfig);
+           });
 
             services.Configure<HostOptions>(s => s.ShutdownTimeout = TimeSpan.FromMinutes(5));
 
@@ -81,6 +113,12 @@ namespace NetworkMonitor.Api
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+              services.AddAsyncServiceInitialization()
+               .AddInitAction<IRabbitRepo>(async (rabbitRepo) =>
+                    {
+                        await rabbitRepo.ConnectAndSetUp();
+                    });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -107,6 +145,11 @@ namespace NetworkMonitor.Api
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
+             app.UseSwagger();
+            app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Non-Authenticated APIs");
+                });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

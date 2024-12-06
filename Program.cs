@@ -32,22 +32,13 @@ namespace NetworkMonitor.Api
         WebHost.CreateDefaultBuilder().UseKestrel(options =>
     {
         //options.Listen(IPAddress.Loopback, 5000);  // http:localhost:5000
-        if (isDevelopmentMode)
+
+        options.Listen(IPAddress.Any, 2086);         // http:*:65123
+        options.Listen(IPAddress.Any, 2087, listenOptions =>
         {
-            options.Listen(IPAddress.Any, 2086);         // http:*:65123
-            options.Listen(IPAddress.Any, 2087, listenOptions =>
-            {
-                listenOptions.UseHttps("https-freenetworkmonitor.pfx", "Ac£0462110");
-            });
-        }
-        else
-        {
-            options.Listen(IPAddress.Any, 80);         // http:*:65123
-            options.Listen(IPAddress.Any, 443, listenOptions =>
-            {
-                listenOptions.UseHttps("https-freenetworkmonitor.pfx", "Ac£0462110");
-            });
-        }
+            listenOptions.UseHttps("https-freenetworkmonitor.pfx", "Ac£0462110");
+        });
+
     }).UseStartup<Startup>();
     }
 }
