@@ -74,7 +74,7 @@ namespace NetworkMonitor.Api
                 }
                 return new NetConnectConfig(configuration, appDataDirectory);
             });
-            services.AddSingleton<ICmdProcessorProvider,CmdProcessorFactory>();
+            services.AddSingleton<ICmdProcessorProvider,CmdProcessorProvider>();
              
             services.AddSingleton<IRabbitRepo>(provider =>
            {

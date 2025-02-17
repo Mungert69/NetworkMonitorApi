@@ -9,7 +9,7 @@ using NetworkMonitor.Objects.Factory;
 using NetworkMonitor.Api.Services;
 using System;
 using System.Collections.Generic;
-using OpenAI.ObjectModels.ResponseModels;
+using Betalgo.Ranul.OpenAI.ObjectModels.ResponseModels;
 
 namespace NetworkMonitor.Controllers
 {
