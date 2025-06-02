@@ -4,13 +4,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MetroLog;
-using NetworkMonitor.Objects.Factory;
+using NetworkMonitor.Objects;
 using System;
 using System.Net;
 namespace NetworkMonitor.Api
 {
     public class Program
     {
+        private static string _pfxKey = "";
+
         //private bool _isDevelopmentMode;
         public static void Main(string[] args)
         {
@@ -25,6 +27,8 @@ namespace NetworkMonitor.Api
             IConfigurationRoot config = new ConfigurationBuilder()
         .AddJsonFile(appFile, optional: false)
         .Build();
+            _pfxKey = config["PfxKey"] ?? "";
+
             IWebHost host = CreateWebHostBuilder(isDevelopmentMode).Build();
             host.Run();
         }
@@ -36,7 +40,8 @@ namespace NetworkMonitor.Api
         options.Listen(IPAddress.Any, 2086);         // http:*:65123
         options.Listen(IPAddress.Any, 2087, listenOptions =>
         {
-            listenOptions.UseHttps("https-freenetworkmonitor.pfx", "Ac£0462110");
+            listenOptions.UseHttps($"https-{AppConstants.AppSecondLevelDomain}.pfx", _pfxKey);
+
         });
 
     }).UseStartup<Startup>();

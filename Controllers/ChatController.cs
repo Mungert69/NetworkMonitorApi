@@ -30,7 +30,7 @@ namespace NetworkMonitor.Controllers
         {
             var authHeader = Request.Headers["x-rapidapi-proxy-secret"].FirstOrDefault();
             var altAuthHeader=Request.Headers["x-rapidapi-secret"].FirstOrDefault();
-            if (authHeader != _apiService.OpenAIPluginServiceKey && altAuthHeader != _apiService.OpenAIPluginServiceKey)
+            if (authHeader != _apiService.RapidApiKey && altAuthHeader != _apiService.RapidApiKey)
             {
                 _logger.LogError("Invalid RapidAPI Proxy Secret.");
                 throw new UnauthorizedAccessException("Invalid RapidAPI Proxy Secret.");
